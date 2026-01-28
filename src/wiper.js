@@ -3,13 +3,13 @@ import { BaseVideoPlayer } from './video-player';
 export class ComparisonWiper extends BaseVideoPlayer {
     constructor(container) {
         super(container);
-        
+
         const video1 = container.getElementsByTagName('video')[1];
         const video2 = container.getElementsByTagName('video')[0];
-        
+
         this.addVideoWithWrapper(video1);
         this.addVideoWithWrapper(video2);
-        
+
         this.setupWiper();
         this.syncVideos(0);
     }
@@ -20,9 +20,9 @@ export class ComparisonWiper extends BaseVideoPlayer {
         const wrapper1 = this.wrappers[0];
         const wrapper2 = this.wrappers[1];
         const clipperOuter = document.createElement('div');
-        clipperOuter.classList.add('vc-wiper-clipper-outer');
+        clipperOuter.classList.add('uevc-wiper-clipper-outer');
         const clipper = document.createElement('div');
-        clipper.classList.add('vc-wiper-clipper');
+        clipper.classList.add('uevc-wiper-clipper');
         clipperOuter.appendChild(clipper);
         wrapper2.parentNode.insertBefore(clipperOuter, wrapper2);
         clipper.appendChild(wrapper2);
@@ -33,7 +33,7 @@ export class ComparisonWiper extends BaseVideoPlayer {
         video1.addEventListener('loadedmetadata', () => {
             this.container.style.aspectRatio = `${video1.videoWidth / video1.videoHeight} / 1`;
         });
-        
+
         // Monitor video1 progress to trigger animation
         video1.addEventListener('timeupdate', () => {
             if (!this.animationTriggered && video2.currentTime > video2.duration * 0.5) {
@@ -81,7 +81,7 @@ export class ComparisonWiper extends BaseVideoPlayer {
                 clipper.appendChild(tempVideo);
                 this.video2Clipped = true;
                 this.animationTriggered = false;
-            } 
+            }
         });
     }
 

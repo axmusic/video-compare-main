@@ -1,20 +1,19 @@
-# Video Compare
+# UE video compare
 
-A simple javascript video comparison library for both slider and wiper.
+A simple library for video comparison.
 
 ## Usage
 
-Load the library from CDN:
+Load the script from CDN:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/video-compare/dist/video-compare.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ue-video-compare/dist/ue-video-compare.min.js"></script>
 ```
 
 Use the following HTML structure to initialize the video comparison slider:
 
 ```html
-```html
-<div class="vc-slider-container" >
+<div class="uevc-slider-container" >
     <video playsinline autoplay muted loop>
     <source src="./static/videos/video1.mp4">
     </video>
@@ -38,7 +37,7 @@ You can customize the slider behavior using data attributes:
 
 Example:
 ```html
-<div class="vc-slider-container" data-trigger="click" data-direction="vertical" data-initial="30">
+<div class="uevc-slider-container" data-trigger="click" data-direction="vertical" data-initial="30">
     ...
 </div>
 ```
@@ -46,5 +45,6 @@ Example:
 ## Features
 
 - Support synchronization of the multiple videos
-- Simple and easy to use - just add the class name to the container
-- Multiple video comparison modes: slider, wiper, four grid, side by side and three video comparison
+- Support interaction with mouse(hover) and touch(touch move)
+- Support caption with `uevc-caption="caption"` attribute
+- Support slider, wiper, side by side, 3 video comparison, 4-grid comparison

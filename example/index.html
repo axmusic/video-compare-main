@@ -97,11 +97,12 @@
 <body>
     <div class="header">
         <h1>Video Compare Library Demo</h1>
+        <script src="./js/ue-video-compare.min.js"></script>
     </div>
 
     <div class="demo-section">
         <h2>Load the library</h2>
-        <pre><code class="html">&lt;script src="https://cdn.jsdelivr.net/npm/video-compare/dist/video-compare.min.js"&gt;&lt;/script&gt;</code></pre>
+        <pre><code class="html">&lt;script src="https://cdn.jsdelivr.net/npm/ue-video-compare/dist/ue-video-compare.min.js"&gt;&lt;/script&gt;</code></pre>
     </div>
 
     <div class="tabs">
@@ -118,21 +119,21 @@
             <h2>1. Slider Comparison (Hover - Default)</h2>
             <p>Move your mouse or touch the screen to slide the white divider line. (Initial position set to 20%)</p>
             <pre><code class="html">
-&lt;div class="vc-slider-container" data-initial="20"&gt;
-    &lt;video playsinline autoplay muted loop vc-caption="Before"&gt;
+&lt;div class="uevc-slider-container" data-initial="20"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Before"&gt;
         &lt;source src="./videos/video1.webm"&gt;
     &lt;/video&gt;
-    &lt;video playsinline autoplay muted loop vc-caption="After"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="After"&gt;
         &lt;source src="./videos/video2.webm"&gt;
     &lt;/video&gt;
 &lt;/div&gt;</code></pre>
             <div class="demo-container">
-                <div class="vc-slider-container" data-initial="20">
-                    <video playsinline autoplay muted loop vc-caption="Before">
+                <div class="uevc-slider-container" data-initial="20">
+                    <video playsinline autoplay muted loop uevc-caption="Before">
                         <source
                             src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
                     </video>
-                    <video playsinline autoplay muted loop vc-caption="After">
+                    <video playsinline autoplay muted loop uevc-caption="After">
                         <source
                             src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
                     </video>
@@ -144,21 +145,21 @@
             <h2>Slider Comparison (Click/Drag)</h2>
             <p>Click and drag to slide the white divider line. Hovering will not move the slider.</p>
             <pre><code class="html">
-&lt;div class="vc-slider-container" data-trigger="click"&gt;
-    &lt;video playsinline autoplay muted loop vc-caption="Baseline"&gt;
+&lt;div class="uevc-slider-container" data-trigger="click"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Baseline"&gt;
         &lt;source src="./videos/video1.webm"&gt;
     &lt;/video&gt;
-    &lt;video playsinline autoplay muted loop vc-caption="Ours"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Ours"&gt;
         &lt;source src="./videos/video2.webm"&gt;
     &lt;/video&gt;
 &lt;/div&gt;</code></pre>
             <div class="demo-container">
-                <div class="vc-slider-container" data-trigger="click">
-                    <video playsinline autoplay muted loop vc-caption="Baseline">
+                <div class="uevc-slider-container" data-trigger="click">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
                         <source
                             src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
                     </video>
-                    <video playsinline autoplay muted loop vc-caption="Ours">
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
                         <source
                             src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
                     </video>
@@ -170,21 +171,21 @@
             <h2>Slider Comparison (Vertical)</h2>
             <p>Compare videos vertically.</p>
             <pre><code class="html">
-&lt;div class="vc-slider-container" data-direction="vertical"&gt;
-    &lt;video playsinline autoplay muted loop vc-caption="Baseline"&gt;
+&lt;div class="uevc-slider-container" data-direction="vertical"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Baseline"&gt;
         &lt;source src="./videos/video1.webm"&gt;
     &lt;/video&gt;
-    &lt;video playsinline autoplay muted loop vc-caption="Ours"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Ours"&gt;
         &lt;source src="./videos/video2.webm"&gt;
     &lt;/video&gt;
 &lt;/div&gt;</code></pre>
             <div class="demo-container">
-                <div class="vc-slider-container" data-direction="vertical">
-                    <video playsinline autoplay muted loop vc-caption="Baseline">
+                <div class="uevc-slider-container" data-direction="vertical">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
                         <source
                             src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
                     </video>
-                    <video playsinline autoplay muted loop vc-caption="Ours">
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
                         <source
                             src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
                     </video>
@@ -196,21 +197,21 @@
             <h2>Slider Comparison (Vertical + Click)</h2>
             <p>Compare videos vertically using click/drag.</p>
             <pre><code class="html">
-&lt;div class="vc-slider-container" data-direction="vertical" data-trigger="click"&gt;
-    &lt;video playsinline autoplay muted loop vc-caption="Baseline"&gt;
+&lt;div class="uevc-slider-container" data-direction="vertical" data-trigger="click"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Baseline"&gt;
         &lt;source src="./videos/video1.webm"&gt;
     &lt;/video&gt;
-    &lt;video playsinline autoplay muted loop vc-caption="Ours"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Ours"&gt;
         &lt;source src="./videos/video2.webm"&gt;
     &lt;/video&gt;
 &lt;/div&gt;</code></pre>
             <div class="demo-container">
-                <div class="vc-slider-container" data-direction="vertical" data-trigger="click">
-                    <video playsinline autoplay muted loop vc-caption="Baseline">
+                <div class="uevc-slider-container" data-direction="vertical" data-trigger="click">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
                         <source
                             src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
                     </video>
-                    <video playsinline autoplay muted loop vc-caption="Ours">
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
                         <source
                             src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
                     </video>
@@ -222,21 +223,21 @@
             <h2>2. Wiper Comparison</h2>
             <p>Wait for 1 second, and a wipe transition will reveal the second video, then repeat.</p>
             <pre><code class="html">
-&lt;div class="vc-wiper-container"&gt;
-    &lt;video playsinline autoplay muted loop vc-caption="Baseline"&gt;
+&lt;div class="uevc-wiper-container"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Baseline"&gt;
         &lt;source src="./videos/video1.webm"&gt;
     &lt;/video&gt;
-    &lt;video playsinline autoplay muted loop vc-caption="Ours"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Ours"&gt;
         &lt;source src="./videos/video2.webm"&gt;
     &lt;/video&gt;
 &lt;/div&gt;</code></pre>
             <div class="demo-container">
-                <div class="vc-wiper-container">
-                    <video playsinline autoplay muted loop vc-caption="Baseline">
+                <div class="uevc-wiper-container">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
                         <source
                             src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
                     </video>
-                    <video playsinline autoplay muted loop vc-caption="Ours">
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
                         <source
                             src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
                     </video>
@@ -248,21 +249,21 @@
         <div class="tab-content" data-tab="side">
             <h2>3. Side by Side Comparison</h2>
             <pre><code class="html">
-&lt;div class="vc-side-by-side-container"&gt;
-    &lt;video playsinline autoplay muted loop vc-caption="Baseline"&gt;
+&lt;div class="uevc-side-by-side-container"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Baseline"&gt;
         &lt;source src="./videos/video1.webm"&gt;
     &lt;/video&gt;
-    &lt;video playsinline autoplay muted loop vc-caption="Ours"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Ours"&gt;
         &lt;source src="./videos/video2.webm"&gt;
     &lt;/video&gt;
 &lt;/div&gt;</code></pre>
             <div class="demo-container">
-                <div class="vc-side-by-side-container">
-                    <video playsinline autoplay muted loop vc-caption="Baseline">
+                <div class="uevc-side-by-side-container">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
                         <source
                             src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
                     </video>
-                    <video playsinline autoplay muted loop vc-caption="Ours">
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
                         <source
                             src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
                     </video>

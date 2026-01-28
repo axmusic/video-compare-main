@@ -5,30 +5,36 @@ import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 
 const isWatch = process.env.ROLLUP_WATCH;
+const version = require('./package.json').version;
+const banner = `/*! UE Video Comparison - v${version} */`;
 
 export default {
   input: 'src/index.js',
   output: [
     {
-      file: 'dist/video-compare.js',
+      file: 'dist/ue-video-compare.js',
       format: 'iife',
-      name: 'VideoCompare'
+      name: 'UEVideoCompare',
+      banner
     },
     {
-      file: 'dist/video-compare.min.js',
+      file: 'dist/ue-video-compare.min.js',
       format: 'iife',
-      name: 'VideoCompare',
-      plugins: [terser()]
+      name: 'UEVideoCompare',
+      plugins: [terser()],
+      banner
     },
     {
-      file: 'example/js/video-compare.min.js',
+      file: 'example/js/ue-video-compare.min.js',
       format: 'iife',
-      name: 'VideoCompare',
-      plugins: [terser()]
+      name: 'UEVideoCompare',
+      plugins: [terser()],
+      banner
     },
     {
-      file: 'dist/video-compare.esm.js',
-      format: 'es'
+      file: 'dist/ue-video-compare.esm.js',
+      format: 'es',
+      banner
     }
   ],
   plugins: [

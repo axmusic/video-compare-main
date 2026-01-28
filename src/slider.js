@@ -17,7 +17,7 @@ export class ComparisonSlider extends BaseVideoPlayer {
     setupSlider() {
         const wrapper2 = this.wrappers[1];
         const clipper = document.createElement('div');
-        clipper.classList.add('vc-slider-clipper');
+        clipper.classList.add('uevc-slider-clipper');
 
         wrapper2.parentNode.insertBefore(clipper, wrapper2);
         clipper.appendChild(wrapper2);

@@ -1,10 +1,10 @@
 {
-    "name": "video-compare",
+    "name": "ue-video-compare",
     "version": "0.0.7",
     "description": "A simple library for video comparison",
-    "main": "dist/video-compare.js",
-    "unpkg": "dist/video-compare.min.js",
-    "module": "dist/video-compare.esm.js",
+    "main": "dist/ue-video-compare.js",
+    "unpkg": "dist/ue-video-compare.min.js",
+    "module": "dist/ue-video-compare.esm.js",
     "files": [
         "dist"
     ],

@@ -5,7 +5,7 @@ import { ComparisonSlider, ThreeVideoComparison } from './slider';
 import { SideBySide } from './side-by-side';
 import { FourGrid } from './four-grid';
 
-function initVideoCompare() {
+function initUEVideoCompare() {
     const initialize = () => {
         const containers = document.getElementsByClassName(
             SLIDER_CONTAINER_CLASS,
@@ -66,5 +66,5 @@ function initVideoCompare() {
     }
 }
 
-initVideoCompare();
-export default initVideoCompare;
+initUEVideoCompare();
+export default initUEVideoCompare;

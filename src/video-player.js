@@ -5,7 +5,7 @@ export class BaseVideoPlayer {
         this.wrappers = [];
         this.readyStates = [];
         this.captions = [];
-        
+
         this.loadingElement = document.createElement('div');
         this.loadingElement.textContent = 'Loading';
         this.loadingElement.style.position = 'absolute';
@@ -16,9 +16,9 @@ export class BaseVideoPlayer {
         this.loadingElement.style.color = 'white';
         this.loadingElement.style.padding = '10px 20px';
         this.loadingElement.style.borderRadius = '4px';
-        this.loadingElement.style.zIndex = '4'; 
+        this.loadingElement.style.zIndex = '4';
         this.container.appendChild(this.loadingElement);
-        
+
         this.loadingDots = 0;
         this.loadingInterval = setInterval(() => this.animateLoading(), 500);
     }
@@ -45,8 +45,8 @@ export class BaseVideoPlayer {
     }
 
     addCaption(video, wrapper) {
-        // Add caption if vc-caption attribute exists
-        const caption = video.getAttribute('vc-caption');
+        // Add caption if uevc-caption attribute exists
+        const caption = video.getAttribute('uevc-caption');
         if (caption) {
             const captionDiv = document.createElement('span');
             captionDiv.textContent = caption;
@@ -66,11 +66,11 @@ export class BaseVideoPlayer {
             wrapper.appendChild(captionDiv);
             this.captions.push(captionDiv);
 
-            // Watch for changes to vc-caption attribute
+            // Watch for changes to uevc-caption attribute
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'vc-caption') {
-                        const newCaption = video.getAttribute('vc-caption');
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'uevc-caption') {
+                        const newCaption = video.getAttribute('uevc-caption');
                         captionDiv.textContent = newCaption;
                     }
                 });
@@ -78,7 +78,7 @@ export class BaseVideoPlayer {
 
             observer.observe(video, {
                 attributes: true,
-                attributeFilter: ['vc-caption']
+                attributeFilter: ['uevc-caption']
             });
         }
     }
@@ -96,7 +96,7 @@ export class BaseVideoPlayer {
         video.style.objectFit = 'contain';
         video.style.maxWidth = 'none';
         this.addCaption(video, wrapper);
-        
+
     }
 
     resetReadyStates() {
