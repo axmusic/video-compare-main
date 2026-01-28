@@ -43,8 +43,6 @@ Example:
 </div>
 ```
 
-For more example, please check the [demo page](https://liangrunda.github.io/video-compare/) and [source code](https://github.com/liangrunda/video-compare/tree/main/example).
-
 ## Features
 
 - Support synchronization of the multiple videos
