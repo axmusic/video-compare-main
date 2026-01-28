@@ -34,10 +34,11 @@ You can customize the slider behavior using data attributes:
 - `data-direction`: Controls the slider orientation.
     - `horizontal` (default): Slider moves left/right.
     - `vertical`: Slider moves up/down.
+- `data-initial`: Sets the initial position of the slider (0-100). Default is 50.
 
 Example:
 ```html
-<div class="vc-slider-container" data-trigger="click" data-direction="vertical">
+<div class="vc-slider-container" data-trigger="click" data-direction="vertical" data-initial="30">
     ...
 </div>
 ```

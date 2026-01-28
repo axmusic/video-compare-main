@@ -39,6 +39,23 @@ export class ComparisonSlider extends BaseVideoPlayer {
             this.container.classList.add('vertical');
         }
 
+        const setPosition = (position) => {
+            // Clamp position between 0 and 100
+            position = Math.max(0, Math.min(100, position));
+
+            if (direction === 'vertical') {
+                clipper.style.height = position + '%';
+                wrapper2.style.height = (position === 0 ? 100 : (100 / position) * 100) + '%';
+            } else {
+                clipper.style.width = position + '%';
+                wrapper2.style.width = (position === 0 ? 100 : (100 / position) * 100) + '%';
+            }
+        };
+
+        // Set initial position
+        const initialPosition = parseFloat(this.container.getAttribute('data-initial')) || 50;
+        setPosition(initialPosition);
+
         const trackLocation = (e) => {
             const rect = this.container.getBoundingClientRect();
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -48,19 +65,11 @@ export class ComparisonSlider extends BaseVideoPlayer {
 
             if (direction === 'vertical') {
                 position = ((clientY - rect.top) / this.container.offsetHeight) * 100;
-                // Clamp position between 0 and 100
-                position = Math.max(0, Math.min(100, position));
-
-                clipper.style.height = position + '%';
-                wrapper2.style.height = (position === 0 ? 100 : (100 / position) * 100) + '%';
             } else {
                 position = ((clientX - rect.left) / this.container.offsetWidth) * 100;
-                // Clamp position between 0 and 100
-                position = Math.max(0, Math.min(100, position));
-
-                clipper.style.width = position + '%';
-                wrapper2.style.width = (position === 0 ? 100 : (100 / position) * 100) + '%';
             }
+
+            setPosition(position);
         };
 
         if (trigger === 'click') {
