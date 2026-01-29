@@ -38,6 +38,9 @@ You can customize the slider behavior using data attributes:
     - `auto` (default): Videos autoplay and loop continuously.
     - `interaction`: Videos start paused and play on first interaction (hover/click/touch).
     - `manual`: Videos only play while the user is actively interacting (hover/touch).
+- `data-viewport-pause`: Controls whether videos should pause when they scroll out of the viewport for performance.
+    - `true`: Pause when out of view, resume when back in view.
+    - `false` (default): Keep playing regardless of visibility.
 
 **Wiper mode only:**
 - `data-duration`: How long (in seconds) the video plays before the wipe starts. Default is 1.

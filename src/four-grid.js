@@ -14,6 +14,7 @@ export class FourGrid extends BaseVideoPlayer {
 
         this.syncVideos(0);
         this.setupPlayMode();
+        this.setupViewportObserver();
 
         videos[0].addEventListener('loadedmetadata', () => {
             this.container.style.aspectRatio = `${videos[0].videoWidth * 2 / (videos[0].videoHeight * 2)} / 1`;

@@ -115,6 +115,7 @@
             <button class="tab-button" data-tab="wiper">Wiper</button>
             <button class="tab-button" data-tab="side">Side by Side</button>
             <button class="tab-button" data-tab="play-modes">Play Modes</button>
+            <button class="tab-button" data-tab="performance">Performance</button>
         </div>
 
         <div class="tab-content active" data-tab="slider">
@@ -132,12 +133,10 @@
             <div class="demo-container">
                 <div class="uevc-slider-container" data-initial="20">
                     <video playsinline autoplay muted loop uevc-caption="Before">
-                        <source
-                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174240.mp4">
                     </video>
                     <video playsinline autoplay muted loop uevc-caption="After">
-                        <source
-                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174204.mp4">
                     </video>
                 </div>
             </div>
@@ -357,6 +356,39 @@
                 </div>
             </div>
         </div>
+
+        <div class="tab-content" data-tab="performance">
+            <h2>Performance Optimization</h2>
+            <p>Automatically pause videos when they are not in the viewport to save resources (CPU/GPU).</p>
+            <p><strong>Note:</strong> Open your browser's developer console and look at the "Network" or "Media" tabs
+                (or keep an eye on CPU usage) to see the effect.</p>
+
+            <pre><code class="html">&lt;div class="uevc-slider-container" data-viewport-pause="true"&gt;...&lt;/div&gt;</code></pre>
+
+            <div
+                style="height: 100vh; display: flex; align-items: center; justify-content: center; background: #f0f0f0; margin: 20px 0; border-radius: 8px;">
+                <p>Scroll down to see the video slider...</p>
+            </div>
+
+            <div class="demo-container">
+                <div class="uevc-slider-container" data-viewport-pause="true" data-initial="70">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                </div>
+            </div>
+
+            <div
+                style="height: 100vh; display: flex; align-items: center; justify-content: center; background: #f0f0f0; margin: 20px 0; border-radius: 8px;">
+                <p>Scroll up or down to pause the video above.</p>
+            </div>
+        </div>
+
 
         <script>
             document.addEventListener('DOMContentLoaded', () => {

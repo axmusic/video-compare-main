@@ -1,3 +1,9 @@
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .uevc-slider-container {
     display: inline-block;
     line-height: 0;
@@ -11,6 +17,13 @@
     top: 0;
     left: 0;
     height: 100%;
+    max-width: none;
+}
+
+.uevc-slider-container .video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     max-width: none;
 }
 
@@ -33,7 +46,7 @@
 }
 
 /* Vertical Slider Styles */
-.uevc-slider-container.vertical>.uevc-slider-clipper {
+[class*="uevc-"][class*="-container"].vertical>.uevc-slider-clipper {
     width: 100%;
     height: 50%;
     top: 0;
@@ -45,7 +58,7 @@
     border-bottom: 2px solid white;
 }
 
-.uevc-slider-container.vertical>.uevc-slider-clipper>.video-wrapper {
+[class*="uevc-"][class*="-container"].vertical>.uevc-slider-clipper>.video-wrapper {
     width: 100%;
     height: 200%;
     top: 0;
@@ -88,6 +101,13 @@
     z-index: 3;
 }
 
+.uevc-wiper-container .video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: none;
+}
+
 .uevc-wiper-container>.uevc-wiper-clipper-outer>.uevc-wiper-clipper>.video-wrapper>video {
     width: 100%;
     position: absolute;
@@ -128,6 +148,13 @@
     height: 100%;
     max-width: none;
     left: 0;
+}
+
+.uevc-three-video-comparison-container .video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: none;
 }
 
 .uevc-side-by-side-container {

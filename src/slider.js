@@ -13,6 +13,7 @@ export class ComparisonSlider extends BaseVideoPlayer {
         this.setupSlider();
         this.syncVideos(0);
         this.setupPlayMode();
+        this.setupViewportObserver();
     }
 
     setupSlider() {

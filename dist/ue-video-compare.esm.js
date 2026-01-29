@@ -1,4 +1,5 @@
 /*! UE Video Comparison - v0.0.7 */
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 const SLIDER_CONTAINER_CLASS = 'uevc-slider-container';
 const WIPER_CONTAINER_CLASS = 'uevc-wiper-container';
 const SIDE_BY_SIDE_CONTAINER_CLASS = 'uevc-side-by-side-container';
@@ -7,7 +8,7 @@ const FOUR_GRID_CONTAINER_CLASS = 'uevc-four-grid-container';
 
 var e=[],t=[];function n(n,r){if(n&&"undefined"!=typeof document){var a,s=!0===r.prepend?"prepend":"append",d=!0===r.singleTag,i="string"==typeof r.container?document.querySelector(r.container):document.getElementsByTagName("head")[0];if(d){var u=e.indexOf(i);-1===u&&(u=e.push(i)-1,t[u]={}),a=t[u]&&t[u][s]?t[u][s]:t[u][s]=c();}else a=c();65279===n.charCodeAt(0)&&(n=n.substring(1)),a.styleSheet?a.styleSheet.cssText+=n:a.appendChild(document.createTextNode(n));}function c(){var e=document.createElement("style");if(e.setAttribute("type","text/css"),r.attributes)for(var t=Object.keys(r.attributes),n=0;n<t.length;n++)e.setAttribute(t[n],r.attributes[t[n]]);var a="prepend"===s?"afterbegin":"beforeend";return i.insertAdjacentElement(a,e),e}}
 
-var css = ".uevc-slider-container {\n    display: inline-block;\n    line-height: 0;\n    position: relative;\n    width: 100%;\n}\n\n.uevc-slider-container>.video-wrapper {\n    width: 100%;\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 100%;\n    max-width: none;\n}\n\n.uevc-slider-container>.uevc-slider-clipper {\n    width: 50%;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    overflow: hidden;\n    z-index: 3;\n    box-shadow: 0 0 0 2px white;\n}\n\n.uevc-slider-container>.uevc-slider-clipper>.video-wrapper {\n    width: 200%;\n    position: absolute;\n    height: 100%;\n    max-width: none;\n    left: 0;\n}\n\n/* Vertical Slider Styles */\n.uevc-slider-container.vertical>.uevc-slider-clipper {\n    width: 100%;\n    height: 50%;\n    top: 0;\n    bottom: auto;\n    left: 0;\n    right: 0;\n    box-shadow: 0 0 0 0 white;\n    /* Reset default shadow */\n    border-bottom: 2px solid white;\n}\n\n.uevc-slider-container.vertical>.uevc-slider-clipper>.video-wrapper {\n    width: 100%;\n    height: 200%;\n    top: 0;\n    left: 0;\n}\n\n.uevc-wiper-container {\n    display: inline-block;\n    line-height: 0;\n    position: relative;\n    width: 100%;\n}\n\n.uevc-wiper-container>.video-wrapper {\n    width: 99%;\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 99%;\n}\n\n.uevc-wiper-container>.uevc-wiper-clipper-outer {\n    width: 100%;\n    position: absolute;\n    top: 0;\n    left: 0;\n    bottom: 0;\n    overflow: hidden;\n    z-index: 3;\n}\n\n.uevc-wiper-container>.uevc-wiper-clipper-outer>.uevc-wiper-clipper {\n    width: 99%;\n    /* leave some space for border */\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 99%;\n    overflow: hidden;\n    z-index: 3;\n}\n\n.uevc-wiper-container>.uevc-wiper-clipper-outer>.uevc-wiper-clipper>.video-wrapper>video {\n    width: 100%;\n    position: absolute;\n    height: 100%;\n    max-width: none;\n    left: 0;\n}\n\n.uevc-three-video-comparison-container {\n    display: inline-block;\n    line-height: 0;\n    position: relative;\n    width: 100%;\n}\n\n.uevc-three-video-comparison-container>.video-wrapper {\n    width: 100%;\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 100%;\n    max-width: none;\n}\n\n.uevc-three-video-comparison-container>.uevc-slider-clipper {\n    width: 50%;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    overflow: hidden;\n    z-index: 3;\n    box-shadow: 0 0 0 2px white;\n}\n\n.uevc-three-video-comparison-container>.uevc-slider-clipper>.video-wrapper {\n    width: 200%;\n    position: absolute;\n    height: 100%;\n    max-width: none;\n    left: 0;\n}\n\n.uevc-side-by-side-container {\n    display: flex;\n    position: relative;\n    justify-content: center;\n    gap: 0px;\n}\n\n.uevc-side-by-side-container>.video-wrapper {\n    width: 50%;\n    max-width: 50%;\n    height: auto;\n    position: relative;\n}\n\n.uevc-side-by-side-container>.video-wrapper>video {\n    width: 100%;\n    height: 100%;\n    object-fit: contain;\n}\n\n.uevc-four-grid-container>.video-wrapper {\n    width: 100%;\n    height: 100%;\n    position: relative;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.uevc-four-grid-container>.video-wrapper>video {\n    width: 100%;\n    height: 100%;\n    object-fit: contain;\n}\n\n.uevc-four-grid-container {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    grid-template-rows: 1fr 1fr;\n    gap: 0;\n    overflow: hidden;\n    width: 100%;\n    height: 100%;\n}\n\n/* Caption Styles */\n.uevc-caption {\n    position: absolute;\n    bottom: 10px;\n    right: 10px;\n    background-color: rgba(0, 0, 0, 0.7);\n    color: white;\n    padding: 5px 10px;\n    border-radius: 4px;\n    min-height: fit-content;\n    line-height: 1.4;\n    word-break: break-word;\n    max-width: 80%;\n    visibility: hidden;\n    opacity: 0;\n    transition: opacity 0.3s ease;\n}\n\n.uevc-caption.ue-before {\n    right: auto;\n    left: 10px;\n}\n\n.uevc-caption.ue-overlay {\n    top: 5px;\n    bottom: auto;\n    right: 5px;\n    z-index: 5;\n    font-size: 10px;\n    padding: 2px 4px;\n    border-radius: 2px;\n}\n\n/* Vertical mode caption positioning */\n.uevc-slider-container.vertical .uevc-caption.ue-before {\n    left: auto;\n    right: 10px;\n    bottom: auto;\n    top: 10px;\n}\n\n.uevc-slider-container.vertical .uevc-caption.ue-after {\n    bottom: 10px;\n    top: auto;\n}";
+var css = ".video-wrapper video {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n}\n\n.uevc-slider-container {\n    display: inline-block;\n    line-height: 0;\n    position: relative;\n    width: 100%;\n}\n\n.uevc-slider-container>.video-wrapper {\n    width: 100%;\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 100%;\n    max-width: none;\n}\n\n.uevc-slider-container .video-wrapper video {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    max-width: none;\n}\n\n.uevc-slider-container>.uevc-slider-clipper {\n    width: 50%;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    overflow: hidden;\n    z-index: 3;\n    box-shadow: 0 0 0 2px white;\n}\n\n.uevc-slider-container>.uevc-slider-clipper>.video-wrapper {\n    width: 200%;\n    position: absolute;\n    height: 100%;\n    max-width: none;\n    left: 0;\n}\n\n/* Vertical Slider Styles */\n[class*=\"uevc-\"][class*=\"-container\"].vertical>.uevc-slider-clipper {\n    width: 100%;\n    height: 50%;\n    top: 0;\n    bottom: auto;\n    left: 0;\n    right: 0;\n    box-shadow: 0 0 0 0 white;\n    /* Reset default shadow */\n    border-bottom: 2px solid white;\n}\n\n[class*=\"uevc-\"][class*=\"-container\"].vertical>.uevc-slider-clipper>.video-wrapper {\n    width: 100%;\n    height: 200%;\n    top: 0;\n    left: 0;\n}\n\n.uevc-wiper-container {\n    display: inline-block;\n    line-height: 0;\n    position: relative;\n    width: 100%;\n}\n\n.uevc-wiper-container>.video-wrapper {\n    width: 99%;\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 99%;\n}\n\n.uevc-wiper-container>.uevc-wiper-clipper-outer {\n    width: 100%;\n    position: absolute;\n    top: 0;\n    left: 0;\n    bottom: 0;\n    overflow: hidden;\n    z-index: 3;\n}\n\n.uevc-wiper-container>.uevc-wiper-clipper-outer>.uevc-wiper-clipper {\n    width: 99%;\n    /* leave some space for border */\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 99%;\n    overflow: hidden;\n    z-index: 3;\n}\n\n.uevc-wiper-container .video-wrapper video {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    max-width: none;\n}\n\n.uevc-wiper-container>.uevc-wiper-clipper-outer>.uevc-wiper-clipper>.video-wrapper>video {\n    width: 100%;\n    position: absolute;\n    height: 100%;\n    max-width: none;\n    left: 0;\n}\n\n.uevc-three-video-comparison-container {\n    display: inline-block;\n    line-height: 0;\n    position: relative;\n    width: 100%;\n}\n\n.uevc-three-video-comparison-container>.video-wrapper {\n    width: 100%;\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 100%;\n    max-width: none;\n}\n\n.uevc-three-video-comparison-container>.uevc-slider-clipper {\n    width: 50%;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    overflow: hidden;\n    z-index: 3;\n    box-shadow: 0 0 0 2px white;\n}\n\n.uevc-three-video-comparison-container>.uevc-slider-clipper>.video-wrapper {\n    width: 200%;\n    position: absolute;\n    height: 100%;\n    max-width: none;\n    left: 0;\n}\n\n.uevc-three-video-comparison-container .video-wrapper video {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    max-width: none;\n}\n\n.uevc-side-by-side-container {\n    display: flex;\n    position: relative;\n    justify-content: center;\n    gap: 0px;\n}\n\n.uevc-side-by-side-container>.video-wrapper {\n    width: 50%;\n    max-width: 50%;\n    height: auto;\n    position: relative;\n}\n\n.uevc-side-by-side-container>.video-wrapper>video {\n    width: 100%;\n    height: 100%;\n    object-fit: contain;\n}\n\n.uevc-four-grid-container>.video-wrapper {\n    width: 100%;\n    height: 100%;\n    position: relative;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.uevc-four-grid-container>.video-wrapper>video {\n    width: 100%;\n    height: 100%;\n    object-fit: contain;\n}\n\n.uevc-four-grid-container {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    grid-template-rows: 1fr 1fr;\n    gap: 0;\n    overflow: hidden;\n    width: 100%;\n    height: 100%;\n}\n\n/* Caption Styles */\n.uevc-caption {\n    position: absolute;\n    bottom: 10px;\n    right: 10px;\n    background-color: rgba(0, 0, 0, 0.7);\n    color: white;\n    padding: 5px 10px;\n    border-radius: 4px;\n    min-height: fit-content;\n    line-height: 1.4;\n    word-break: break-word;\n    max-width: 80%;\n    visibility: hidden;\n    opacity: 0;\n    transition: opacity 0.3s ease;\n}\n\n.uevc-caption.ue-before {\n    right: auto;\n    left: 10px;\n}\n\n.uevc-caption.ue-overlay {\n    top: 5px;\n    bottom: auto;\n    right: 5px;\n    z-index: 5;\n    font-size: 10px;\n    padding: 2px 4px;\n    border-radius: 2px;\n}\n\n/* Vertical mode caption positioning */\n.uevc-slider-container.vertical .uevc-caption.ue-before {\n    left: auto;\n    right: 10px;\n    bottom: auto;\n    top: 10px;\n}\n\n.uevc-slider-container.vertical .uevc-caption.ue-after {\n    bottom: 10px;\n    top: auto;\n}";
 n(css,{});
 
 class BaseVideoPlayer {
@@ -18,10 +19,13 @@ class BaseVideoPlayer {
         this.readyStates = [];
         this.captions = [];
 
-        // Read play mode: auto (default), interaction, manual
+        // Read playback options
         this.playMode = this.container.getAttribute('data-play-mode') || 'auto';
+        this.viewportPause = this.container.getAttribute('data-viewport-pause') === 'true';
         this.hasInteracted = false;
         this.playModeSetup = false;
+        this.viewportObserverSetup = false;
+        this.isIntersecting = true; // Assume visible initially
 
         this.loadingElement = document.createElement('div');
         this.loadingElement.textContent = 'Loading';
@@ -99,10 +103,6 @@ class BaseVideoPlayer {
         this.addVideo(video);
         this.wrappers.push(wrapper);
         wrapper.classList.add('video-wrapper');
-        video.style.width = '100%';
-        video.style.height = '100%';
-        video.style.objectFit = 'contain';
-        video.style.maxWidth = 'none';
         this.addCaption(video, wrapper, className);
 
     }
@@ -132,12 +132,40 @@ class BaseVideoPlayer {
             clearInterval(this.loadingInterval);
             this.loadingInterval = null;
 
-            // Play videos based on play mode
+            // Play videos based on play mode, but only if visible (if viewportPause enabled)
             if (this.playMode === 'auto') {
-                this.videos.forEach(video => video.play());
+                if (!this.viewportPause || this.isIntersecting) {
+                    this.videos.forEach(video => video.play());
+                }
             }
-            // For 'interaction' and 'manual' modes, videos remain paused until setupPlayMode handles them
         }
+    }
+
+    setupViewportObserver() {
+        if (this.viewportObserverSetup) return;
+        this.viewportObserverSetup = true;
+
+        if (!window.IntersectionObserver) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                this.isIntersecting = entry.isIntersecting;
+
+                if (this.viewportPause) {
+                    if (this.isIntersecting) {
+                        // Resume playing if mode allows
+                        if (this.playMode === 'auto' || (this.playMode === 'interaction' && this.hasInteracted)) {
+                            this.videos.forEach(video => video.play());
+                        }
+                    } else {
+                        // Pause when out of view
+                        this.videos.forEach(video => video.pause());
+                    }
+                }
+            });
+        }, { threshold: 0 });
+
+        observer.observe(this.container);
     }
 
     setupPlayMode() {
@@ -200,6 +228,7 @@ class ComparisonWiper extends BaseVideoPlayer {
         this.setupWiper();
         this.syncVideos(0);
         this.setupPlayMode();
+        this.setupViewportObserver();
     }
 
     setupWiper() {
@@ -316,6 +345,7 @@ class ComparisonSlider extends BaseVideoPlayer {
         this.setupSlider();
         this.syncVideos(0);
         this.setupPlayMode();
+        this.setupViewportObserver();
     }
 
     setupSlider() {
@@ -454,6 +484,7 @@ class SideBySide extends BaseVideoPlayer {
         this.addVideoWithWrapper(rightVideo, 'ue-after');
         this.syncVideos(0);
         this.setupPlayMode();
+        this.setupViewportObserver();
 
         leftVideo.addEventListener('loadedmetadata', () => {
             this.container.style.aspectRatio = `${leftVideo.videoWidth * 2 / leftVideo.videoHeight} / 1`;
@@ -475,6 +506,7 @@ class FourGrid extends BaseVideoPlayer {
 
         this.syncVideos(0);
         this.setupPlayMode();
+        this.setupViewportObserver();
 
         videos[0].addEventListener('loadedmetadata', () => {
             this.container.style.aspectRatio = `${videos[0].videoWidth * 2 / (videos[0].videoHeight * 2)} / 1`;

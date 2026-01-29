@@ -6,10 +6,13 @@ export class BaseVideoPlayer {
         this.readyStates = [];
         this.captions = [];
 
-        // Read play mode: auto (default), interaction, manual
+        // Read playback options
         this.playMode = this.container.getAttribute('data-play-mode') || 'auto';
+        this.viewportPause = this.container.getAttribute('data-viewport-pause') === 'true';
         this.hasInteracted = false;
         this.playModeSetup = false;
+        this.viewportObserverSetup = false;
+        this.isIntersecting = true; // Assume visible initially
 
         this.loadingElement = document.createElement('div');
         this.loadingElement.textContent = 'Loading';
@@ -87,10 +90,6 @@ export class BaseVideoPlayer {
         this.addVideo(video);
         this.wrappers.push(wrapper);
         wrapper.classList.add('video-wrapper');
-        video.style.width = '100%';
-        video.style.height = '100%';
-        video.style.objectFit = 'contain';
-        video.style.maxWidth = 'none';
         this.addCaption(video, wrapper, className);
 
     }
@@ -120,12 +119,40 @@ export class BaseVideoPlayer {
             clearInterval(this.loadingInterval);
             this.loadingInterval = null;
 
-            // Play videos based on play mode
+            // Play videos based on play mode, but only if visible (if viewportPause enabled)
             if (this.playMode === 'auto') {
-                this.videos.forEach(video => video.play());
+                if (!this.viewportPause || this.isIntersecting) {
+                    this.videos.forEach(video => video.play());
+                }
             }
-            // For 'interaction' and 'manual' modes, videos remain paused until setupPlayMode handles them
         }
+    }
+
+    setupViewportObserver() {
+        if (this.viewportObserverSetup) return;
+        this.viewportObserverSetup = true;
+
+        if (!window.IntersectionObserver) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                this.isIntersecting = entry.isIntersecting;
+
+                if (this.viewportPause) {
+                    if (this.isIntersecting) {
+                        // Resume playing if mode allows
+                        if (this.playMode === 'auto' || (this.playMode === 'interaction' && this.hasInteracted)) {
+                            this.videos.forEach(video => video.play());
+                        }
+                    } else {
+                        // Pause when out of view
+                        this.videos.forEach(video => video.pause());
+                    }
+                }
+            });
+        }, { threshold: 0 });
+
+        observer.observe(this.container);
     }
 
     setupPlayMode() {
