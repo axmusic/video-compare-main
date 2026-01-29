@@ -31,9 +31,37 @@ export class ComparisonSlider extends BaseVideoPlayer {
 
         const trigger = this.container.getAttribute('data-trigger');
         const direction = this.container.getAttribute('data-direction');
+        const handleType = this.container.getAttribute('data-handle-type');
 
         if (direction === 'vertical') {
             this.container.classList.add('vertical');
+        }
+
+        // Create slider line
+        const line = document.createElement('span');
+        line.classList.add('uevc-slider-line');
+        this.container.appendChild(line);
+
+        // Create handle if type is specified
+        let handle = null;
+        if (handleType) {
+            handle = document.createElement('div');
+            handle.classList.add('uevc-handle', handleType);
+
+            if (handleType === 'arrows') {
+                const leftArrow = document.createElement('span');
+                leftArrow.classList.add('uevc-arrow-left');
+                const rightArrow = document.createElement('span');
+                rightArrow.classList.add('uevc-arrow-right');
+                handle.appendChild(leftArrow);
+                handle.appendChild(rightArrow);
+            } else if (handleType === 'icon') {
+                const iconSource = this.container.querySelector('.uevc-handle-icon');
+                if (iconSource) {
+                    handle.appendChild(iconSource);
+                }
+            }
+            this.container.appendChild(handle);
         }
 
         const setPosition = (position) => {
@@ -43,9 +71,13 @@ export class ComparisonSlider extends BaseVideoPlayer {
             if (direction === 'vertical') {
                 clipper.style.height = position + '%';
                 wrapper2.style.height = (position === 0 ? 100 : (100 / position) * 100) + '%';
+                line.style.top = position + '%';
+                if (handle) handle.style.top = position + '%';
             } else {
                 clipper.style.width = position + '%';
                 wrapper2.style.width = (position === 0 ? 100 : (100 / position) * 100) + '%';
+                line.style.left = position + '%';
+                if (handle) handle.style.left = position + '%';
             }
         };
 

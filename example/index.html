@@ -116,6 +116,7 @@
             <button class="tab-button" data-tab="side">Side by Side</button>
             <button class="tab-button" data-tab="play-modes">Play Modes</button>
             <button class="tab-button" data-tab="performance">Performance</button>
+            <button class="tab-button" data-tab="handles">Handles</button>
         </div>
 
         <div class="tab-content active" data-tab="slider">
@@ -386,6 +387,73 @@
             <div
                 style="height: 100vh; display: flex; align-items: center; justify-content: center; background: #f0f0f0; margin: 20px 0; border-radius: 8px;">
                 <p>Scroll up or down to pause the video above.</p>
+            </div>
+        </div>
+        <div class="tab-content" data-tab="handles">
+            <h2>Customizable Slider Handles</h2>
+            <p>Choose from preset handle styles or provide your own custom icon.</p>
+
+            <h3>1. Rectangular Bar</h3>
+            <pre><code class="html">&lt;div class="uevc-slider-container" data-handle-type="bar"&gt;...&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-slider-container" data-handle-type="bar" data-initial="30">
+                    <video playsinline autoplay muted loop uevc-caption="Before">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174240.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="After">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174204.mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>2. Horizontal Arrows</h3>
+            <pre><code class="html">&lt;div class="uevc-slider-container" data-handle-type="arrows"&gt;...&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-slider-container" data-handle-type="arrows" data-initial="50">
+                    <video playsinline autoplay muted loop uevc-caption="Before">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174240.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="After">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174204.mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>3. Custom Icon (FontAwesome or SVG)</h3>
+            <p>Place an element with class <code>uevc-handle-icon</code> inside your container.</p>
+            <pre><code class="html">&lt;div class="uevc-slider-container" data-handle-type="icon"&gt;
+    &lt;div class="uevc-handle-icon"&gt;&lt;i class="fas fa-arrows-alt-h"&gt;&lt;/i&gt;&lt;/div&gt;
+    ...
+&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <!-- Using a simple SVG as an icon example -->
+                <div class="uevc-slider-container" data-handle-type="icon" data-initial="70">
+                    <div class="uevc-handle-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 8L22 12L18 16M6 8L2 12L6 16M2 12H22" />
+                        </svg>
+                    </div>
+                    <video playsinline autoplay muted loop uevc-caption="Before">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174240.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="After">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174204.mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>4. Vertical Slider with Handles</h3>
+            <div class="demo-container" style="height: 500px;">
+                <div class="uevc-slider-container" data-direction="vertical" data-handle-type="arrows"
+                    data-initial="40">
+                    <video playsinline autoplay muted loop uevc-caption="Top">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174240.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Bottom">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174204.mp4">
+                    </video>
+                </div>
             </div>
         </div>
 
