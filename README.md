@@ -91,4 +91,6 @@ UEVideoCompare();
 
 ## License
 
-© Unlimited Elements for Elementor. All rights reserved.
+MIT License 
+
+## Ax Adarsh Pawar, Unlimited Elements for Elementor
