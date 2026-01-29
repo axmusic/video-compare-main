@@ -34,6 +34,10 @@ You can customize the slider behavior using data attributes:
     - `horizontal` (default): Slider moves left/right.
     - `vertical`: Slider moves up/down.
 - `data-initial`: Sets the initial position of the slider (0-100). Default is 50.
+- `data-play-mode`: Controls video playback behavior.
+    - `auto` (default): Videos autoplay and loop continuously.
+    - `interaction`: Videos start paused and play on first interaction (hover/click/touch).
+    - `manual`: Videos only play while the user is actively interacting (hover/touch).
 
 **Wiper mode only:**
 - `data-duration`: How long (in seconds) the video plays before the wipe starts. Default is 1.

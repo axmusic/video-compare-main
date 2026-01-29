@@ -15,6 +15,7 @@ export class SideBySide extends BaseVideoPlayer {
         this.addVideoWithWrapper(leftVideo, 'ue-before');
         this.addVideoWithWrapper(rightVideo, 'ue-after');
         this.syncVideos(0);
+        this.setupPlayMode();
 
         leftVideo.addEventListener('loadedmetadata', () => {
             this.container.style.aspectRatio = `${leftVideo.videoWidth * 2 / leftVideo.videoHeight} / 1`;

@@ -12,6 +12,7 @@ export class ComparisonWiper extends BaseVideoPlayer {
 
         this.setupWiper();
         this.syncVideos(0);
+        this.setupPlayMode();
     }
 
     setupWiper() {

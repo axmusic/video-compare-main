@@ -6,6 +6,11 @@ export class BaseVideoPlayer {
         this.readyStates = [];
         this.captions = [];
 
+        // Read play mode: auto (default), interaction, manual
+        this.playMode = this.container.getAttribute('data-play-mode') || 'auto';
+        this.hasInteracted = false;
+        this.playModeSetup = false;
+
         this.loadingElement = document.createElement('div');
         this.loadingElement.textContent = 'Loading';
         this.loadingElement.style.position = 'absolute';
@@ -102,18 +107,59 @@ export class BaseVideoPlayer {
 
     checkAndPlay() {
         if (this.readyStates.every(state => state)) {
+            // Show videos and captions
             this.videos.forEach(video => {
-                video.play();
-                video.style.visibility = 'visible';  // Show video when ready
-                video.style.opacity = '1';           // Make fully opaque
+                video.style.visibility = 'visible';
+                video.style.opacity = '1';
             });
             this.captions.forEach(caption => {
-                caption.style.visibility = 'visible';  // Show captions when ready
-                caption.style.opacity = '1';           // Make fully opaque
+                caption.style.visibility = 'visible';
+                caption.style.opacity = '1';
             });
             this.loadingElement.style.display = 'none';
             clearInterval(this.loadingInterval);
             this.loadingInterval = null;
+
+            // Play videos based on play mode
+            if (this.playMode === 'auto') {
+                this.videos.forEach(video => video.play());
+            }
+            // For 'interaction' and 'manual' modes, videos remain paused until setupPlayMode handles them
+        }
+    }
+
+    setupPlayMode() {
+        if (this.playModeSetup) return;
+        this.playModeSetup = true;
+
+        if (this.playMode === 'interaction') {
+            // Play on first interaction, then keep playing
+            const playOnce = () => {
+                if (!this.hasInteracted) {
+                    this.hasInteracted = true;
+                    this.videos.forEach(video => video.play());
+                    // Remove listeners after first interaction
+                    this.container.removeEventListener('mouseenter', playOnce);
+                    this.container.removeEventListener('touchstart', playOnce);
+                    this.container.removeEventListener('click', playOnce);
+                }
+            };
+            this.container.addEventListener('mouseenter', playOnce);
+            this.container.addEventListener('touchstart', playOnce, { passive: true });
+            this.container.addEventListener('click', playOnce);
+        } else if (this.playMode === 'manual') {
+            // Play only while interacting
+            const playVideos = () => {
+                this.videos.forEach(video => video.play());
+            };
+            const pauseVideos = () => {
+                this.videos.forEach(video => video.pause());
+            };
+
+            this.container.addEventListener('mouseenter', playVideos);
+            this.container.addEventListener('mouseleave', pauseVideos);
+            this.container.addEventListener('touchstart', playVideos, { passive: true });
+            this.container.addEventListener('touchend', pauseVideos, { passive: true });
         }
     }
 

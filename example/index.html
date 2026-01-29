@@ -114,6 +114,7 @@
             <button class="tab-button" data-tab="three-video">Three Video</button>
             <button class="tab-button" data-tab="wiper">Wiper</button>
             <button class="tab-button" data-tab="side">Side by Side</button>
+            <button class="tab-button" data-tab="play-modes">Play Modes</button>
         </div>
 
         <div class="tab-content active" data-tab="slider">
@@ -293,6 +294,58 @@
 &lt;/div&gt;</code></pre>
             <div class="demo-container">
                 <div class="uevc-side-by-side-container">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content" data-tab="play-modes">
+            <h2>Playback Modes</h2>
+            <p>Control when the videos start playing.</p>
+
+            <h3>1. Auto (Default)</h3>
+            <p>Videos play automatically and loop.</p>
+            <pre><code class="html">&lt;div class="uevc-slider-container" data-play-mode="auto"&gt;...&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-slider-container" data-play-mode="auto" data-initial="30">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>2. Start on Interaction</h3>
+            <p>Videos start paused and begin playing when first hovered or touched.</p>
+            <pre><code class="html">&lt;div class="uevc-slider-container" data-play-mode="interaction"&gt;...&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-slider-container" data-play-mode="interaction" data-initial="30">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>3. Only Play While Interacting (Manual)</h3>
+            <p>Videos only play when the mouse is over the container or while touching it.</p>
+            <pre><code class="html">&lt;div class="uevc-slider-container" data-play-mode="manual"&gt;...&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-slider-container" data-play-mode="manual" data-initial="30">
                     <video playsinline autoplay muted loop uevc-caption="Baseline">
                         <source
                             src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">

@@ -1,5 +1,4 @@
 /*! UE Video Comparison - v0.0.7 */
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 const SLIDER_CONTAINER_CLASS = 'uevc-slider-container';
 const WIPER_CONTAINER_CLASS = 'uevc-wiper-container';
 const SIDE_BY_SIDE_CONTAINER_CLASS = 'uevc-side-by-side-container';
@@ -18,6 +17,11 @@ class BaseVideoPlayer {
         this.wrappers = [];
         this.readyStates = [];
         this.captions = [];
+
+        // Read play mode: auto (default), interaction, manual
+        this.playMode = this.container.getAttribute('data-play-mode') || 'auto';
+        this.hasInteracted = false;
+        this.playModeSetup = false;
 
         this.loadingElement = document.createElement('div');
         this.loadingElement.textContent = 'Loading';
@@ -115,18 +119,59 @@ class BaseVideoPlayer {
 
     checkAndPlay() {
         if (this.readyStates.every(state => state)) {
+            // Show videos and captions
             this.videos.forEach(video => {
-                video.play();
-                video.style.visibility = 'visible';  // Show video when ready
-                video.style.opacity = '1';           // Make fully opaque
+                video.style.visibility = 'visible';
+                video.style.opacity = '1';
             });
             this.captions.forEach(caption => {
-                caption.style.visibility = 'visible';  // Show captions when ready
-                caption.style.opacity = '1';           // Make fully opaque
+                caption.style.visibility = 'visible';
+                caption.style.opacity = '1';
             });
             this.loadingElement.style.display = 'none';
             clearInterval(this.loadingInterval);
             this.loadingInterval = null;
+
+            // Play videos based on play mode
+            if (this.playMode === 'auto') {
+                this.videos.forEach(video => video.play());
+            }
+            // For 'interaction' and 'manual' modes, videos remain paused until setupPlayMode handles them
+        }
+    }
+
+    setupPlayMode() {
+        if (this.playModeSetup) return;
+        this.playModeSetup = true;
+
+        if (this.playMode === 'interaction') {
+            // Play on first interaction, then keep playing
+            const playOnce = () => {
+                if (!this.hasInteracted) {
+                    this.hasInteracted = true;
+                    this.videos.forEach(video => video.play());
+                    // Remove listeners after first interaction
+                    this.container.removeEventListener('mouseenter', playOnce);
+                    this.container.removeEventListener('touchstart', playOnce);
+                    this.container.removeEventListener('click', playOnce);
+                }
+            };
+            this.container.addEventListener('mouseenter', playOnce);
+            this.container.addEventListener('touchstart', playOnce, { passive: true });
+            this.container.addEventListener('click', playOnce);
+        } else if (this.playMode === 'manual') {
+            // Play only while interacting
+            const playVideos = () => {
+                this.videos.forEach(video => video.play());
+            };
+            const pauseVideos = () => {
+                this.videos.forEach(video => video.pause());
+            };
+
+            this.container.addEventListener('mouseenter', playVideos);
+            this.container.addEventListener('mouseleave', pauseVideos);
+            this.container.addEventListener('touchstart', playVideos, { passive: true });
+            this.container.addEventListener('touchend', pauseVideos, { passive: true });
         }
     }
 
@@ -154,6 +199,7 @@ class ComparisonWiper extends BaseVideoPlayer {
 
         this.setupWiper();
         this.syncVideos(0);
+        this.setupPlayMode();
     }
 
     setupWiper() {
@@ -269,6 +315,7 @@ class ComparisonSlider extends BaseVideoPlayer {
 
         this.setupSlider();
         this.syncVideos(0);
+        this.setupPlayMode();
     }
 
     setupSlider() {
@@ -406,6 +453,7 @@ class SideBySide extends BaseVideoPlayer {
         this.addVideoWithWrapper(leftVideo, 'ue-before');
         this.addVideoWithWrapper(rightVideo, 'ue-after');
         this.syncVideos(0);
+        this.setupPlayMode();
 
         leftVideo.addEventListener('loadedmetadata', () => {
             this.container.style.aspectRatio = `${leftVideo.videoWidth * 2 / leftVideo.videoHeight} / 1`;
@@ -424,8 +472,9 @@ class FourGrid extends BaseVideoPlayer {
         for (const video of videos) {
             this.addVideoWithWrapper(video);
         }
-        
+
         this.syncVideos(0);
+        this.setupPlayMode();
 
         videos[0].addEventListener('loadedmetadata', () => {
             this.container.style.aspectRatio = `${videos[0].videoWidth * 2 / (videos[0].videoHeight * 2)} / 1`;
