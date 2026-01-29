@@ -1,65 +1,94 @@
-# UE video compare
+# UE Video Comparison
 
-A simple library for video comparison.
-
-## Usage
-
-Load the script from CDN:
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/ue-video-compare/dist/ue-video-compare.min.js"></script>
-```
-
-Use the following HTML structure to initialize the video comparison slider:
-
-```html
-<div class="uevc-slider-container" >
-    <video playsinline autoplay muted loop>
-    <source src="./static/videos/video1.mp4">
-    </video>
-    <video playsinline autoplay muted loop>
-    <source src="./static/videos/video2.mp4">
-    </video>
-</div>
-```
-
-### Configuration
-
-You can customize the slider behavior using data attributes:
-
-- `data-trigger`: Controls how the user interacts with the slider.
-    - `hover` (default): Slider follows the mouse cursor.
-    - `click`: Slider must be clicked and dragged to move.
-- `data-direction`: Controls the slider orientation.
-    - `horizontal` (default): Slider moves left/right.
-    - `vertical`: Slider moves up/down.
-- `data-initial`: Sets the initial position of the slider (0-100). Default is 50.
-- `data-play-mode`: Controls video playback behavior.
-    - `auto` (default): Videos autoplay and loop continuously.
-    - `interaction`: Videos start paused and play on first interaction (hover/click/touch).
-    - `manual`: Videos only play while the user is actively interacting (hover/touch).
-- `data-viewport-pause`: Controls whether videos should pause when they scroll out of the viewport for performance.
-    - `true`: Pause when out of view, resume when back in view.
-    - `false` (default): Keep playing regardless of visibility.
-
-**Wiper mode only:**
-- `data-duration`: How long (in seconds) the video plays before the wipe starts. Default is 1.
-- `data-transition-duration`: How long (in milliseconds) the wipe animation takes. Default is 1000.
-
-Example:
-```html
-<div class="uevc-slider-container" data-trigger="click" data-direction="vertical" data-initial="30">
-    ...
-</div>
-
-<div class="uevc-wiper-container" data-duration="2" data-transition-duration="1500">
-    ...
-</div>
-```
+A powerful, high-performance library for comparing videos on the web. Support for sliders, wipers, side-by-side, and multi-video grids with perfect synchronization.
 
 ## Features
 
-- Support synchronization of the multiple videos
-- Support interaction with mouse(hover) and touch(touch move)
-- Support caption with `uevc-caption="caption"` attribute
-- Support slider, wiper, side by side, 3 video comparison, 4-grid comparison
+- **Perfect Sync**: All videos stay frame-locked during playback.
+- **Multiple Layouts**: Slider, Wipe, Side-by-Side, 3-Video, and 4-Grid.
+- **Performant**: Built-in viewport detection to pause off-screen videos.
+- **Customizable**: Control triggers (hover/click), directions, playback modes, and handles.
+- **Easy Captions**: Add labels to videos using simple attributes.
+- **Lightweight**: Zero dependencies.
+
+---
+
+## Installation
+
+Add the JS and CSS to your project:
+
+```html
+<!-- Styles -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ue-video-compare/dist/ue-video-compare.css">
+
+<!-- Script -->
+<script src="https://cdn.jsdelivr.net/npm/ue-video-compare/dist/ue-video-compare.min.js"></script>
+```
+
+## Basic Usage
+
+Initialize the comparison by using the appropriate container class:
+
+```html
+<div class="uevc-slider-container">
+    <video playsinline autoplay muted loop uevc-caption="Before">
+        <source src="video1.mp4">
+    </video>
+    <video playsinline autoplay muted loop uevc-caption="After">
+        <source src="video2.mp4">
+    </video>
+</div>
+```
+
+---
+
+## Configuration
+
+### Container Classes
+Choose your comparison layout:
+- `uevc-slider-container`: Classic split-screen slider.
+- `uevc-wiper-container`: Automatic diagonal wipe transition.
+- `uevc-side-by-side-container`: Two videos next to each other.
+- `uevc-three-video-comparison-container`: Three videos with one as a mini-overlay.
+- `uevc-four-grid-container`: A 2x2 grid of synchronized videos.
+
+### Data Attributes (Global)
+Apply these to the main container `<div>`:
+
+| Attribute | Options | Default | Description |
+|-----------|---------|---------|-------------|
+| `data-trigger` | `hover`, `click` | `hover` | How the user moves the slider. |
+| `data-direction` | `horizontal`, `vertical` | `horizontal` | Orientation of the slider. |
+| `data-initial` | `0` to `100` | `50` | Initial split position (percentage). |
+| `data-play-mode` | `auto`, `interaction`, `manual` | `auto` | `interaction`: Play on first hover. `manual`: Play only while hovering. |
+| `data-viewport-pause`| `true`, `false` | `false` | If `true`, pauses video off-screen to save CPU/Battery. |
+| `data-handle-type` | `bar`, `arrows`, `icon` | (none) | Visual style of the slider handle. |
+
+### Data Attributes (Wiper Mode)
+- `data-duration`: Seconds to wait before starting the wipe (Default: `1.0`).
+- `data-transition-duration`: Milliseconds the wipe animation takes (Default: `1000`).
+
+---
+
+## Captions
+
+Add labels to your videos by adding the `uevc-caption` attribute directly to the `<video>` tag:
+
+```html
+<video uevc-caption="Original 4K">...</video>
+```
+
+---
+
+## Advanced: Manual Initialization
+
+If you are adding containers dynamically via JavaScript, you can re-run the initialization:
+
+```javascript
+// Scans for new containers and initializes them (skips already initialized ones)
+UEVideoCompare();
+```
+
+## License
+
+© Unlimited Elements for Elementor. All rights reserved.
