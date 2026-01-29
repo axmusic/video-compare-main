@@ -111,6 +111,7 @@
             <button class="tab-button" data-tab="click-slider">Slider (Click)</button>
             <button class="tab-button" data-tab="vertical-slider">Slider (Vertical)</button>
             <button class="tab-button" data-tab="vertical-click-slider">Slider (Vertical + Click)</button>
+            <button class="tab-button" data-tab="three-video">Three Video</button>
             <button class="tab-button" data-tab="wiper">Wiper</button>
             <button class="tab-button" data-tab="side">Side by Side</button>
         </div>
@@ -219,11 +220,44 @@
             </div>
         </div>
 
+        <div class="tab-content" data-tab="three-video">
+            <h2>Three Video Comparison</h2>
+            <p>Compare three videos with a slider and a small overlay video in the top-right corner.</p>
+            <pre><code class="html">
+&lt;div class="uevc-three-video-comparison-container"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Baseline"&gt;
+        &lt;source src="./videos/video1.webm"&gt;
+    &lt;/video&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Ours"&gt;
+        &lt;source src="./videos/video2.webm"&gt;
+    &lt;/video&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Overlay"&gt;
+        &lt;source src="./videos/video1.webm"&gt;
+    &lt;/video&gt;
+&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-three-video-comparison-container">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Overlay">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+
         <div class="tab-content" data-tab="wiper">
             <h2>2. Wiper Comparison</h2>
-            <p>Wait for 1 second, and a wipe transition will reveal the second video, then repeat.</p>
+            <p>Video plays for 2 seconds, then a 1.5-second wipe transition reveals the second video.</p>
             <pre><code class="html">
-&lt;div class="uevc-wiper-container"&gt;
+&lt;div class="uevc-wiper-container" data-duration="2" data-transition-duration="1500"&gt;
     &lt;video playsinline autoplay muted loop uevc-caption="Baseline"&gt;
         &lt;source src="./videos/video1.webm"&gt;
     &lt;/video&gt;
@@ -232,7 +266,7 @@
     &lt;/video&gt;
 &lt;/div&gt;</code></pre>
             <div class="demo-container">
-                <div class="uevc-wiper-container">
+                <div class="uevc-wiper-container" data-duration="3" data-transition-duration="1500">
                     <video playsinline autoplay muted loop uevc-caption="Baseline">
                         <source
                             src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">

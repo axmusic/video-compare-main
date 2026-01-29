@@ -7,8 +7,8 @@ export class ComparisonWiper extends BaseVideoPlayer {
         const video1 = container.getElementsByTagName('video')[1];
         const video2 = container.getElementsByTagName('video')[0];
 
-        this.addVideoWithWrapper(video1);
-        this.addVideoWithWrapper(video2);
+        this.addVideoWithWrapper(video1, 'ue-after');
+        this.addVideoWithWrapper(video2, 'ue-before');
 
         this.setupWiper();
         this.syncVideos(0);
@@ -30,13 +30,16 @@ export class ComparisonWiper extends BaseVideoPlayer {
         this.video2Clipped = true;
         this.animationTriggered = false;
 
+        // Read timing attributes - duration is in seconds
+        const duration = parseFloat(this.container.getAttribute('data-duration')) || 1.0;
+
         video1.addEventListener('loadedmetadata', () => {
             this.container.style.aspectRatio = `${video1.videoWidth / video1.videoHeight} / 1`;
         });
 
         // Monitor video1 progress to trigger animation
         video1.addEventListener('timeupdate', () => {
-            if (!this.animationTriggered && video2.currentTime > video2.duration * 0.5) {
+            if (!this.animationTriggered && video2.currentTime > duration) {
                 console.log('triggering animation');
                 requestAnimationFrame(() => {
                     clipperOuter.style.backgroundColor = 'white';
@@ -48,9 +51,9 @@ export class ComparisonWiper extends BaseVideoPlayer {
             }
         });
 
-        // Swap videos when video1 seeks to the first half
+        // Swap videos when video1 seeks before the trigger point
         video1.addEventListener('seeked', () => {
-            if (video1.currentTime < video1.duration * 0.5) {
+            if (video1.currentTime < duration) {
                 this.animationTriggered = false;
                 clipper.style.clipPath = null;
                 clipperOuter.style.clipPath = null;
@@ -87,7 +90,8 @@ export class ComparisonWiper extends BaseVideoPlayer {
 
     startAnimation(clipper) {
         const startTime = Date.now();
-        const duration = 1000;
+        // Read transition duration from data-transition-duration attribute, default to 1000ms
+        const duration = parseInt(this.container.getAttribute('data-transition-duration')) || 1000;
 
         const animate = () => {
             const currentTime = Date.now();

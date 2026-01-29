@@ -35,9 +35,17 @@ You can customize the slider behavior using data attributes:
     - `vertical`: Slider moves up/down.
 - `data-initial`: Sets the initial position of the slider (0-100). Default is 50.
 
+**Wiper mode only:**
+- `data-duration`: How long (in seconds) the video plays before the wipe starts. Default is 1.
+- `data-transition-duration`: How long (in milliseconds) the wipe animation takes. Default is 1000.
+
 Example:
 ```html
 <div class="uevc-slider-container" data-trigger="click" data-direction="vertical" data-initial="30">
+    ...
+</div>
+
+<div class="uevc-wiper-container" data-duration="2" data-transition-duration="1500">
     ...
 </div>
 ```

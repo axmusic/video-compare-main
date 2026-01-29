@@ -7,8 +7,8 @@ export class ComparisonSlider extends BaseVideoPlayer {
         const video1 = container.getElementsByTagName('video')[1];
         const video2 = container.getElementsByTagName('video')[0];
 
-        this.addVideoWithWrapper(video1);
-        this.addVideoWithWrapper(video2);
+        this.addVideoWithWrapper(video1, 'ue-after');
+        this.addVideoWithWrapper(video2, 'ue-before');
 
         this.setupSlider();
         this.syncVideos(0);
@@ -21,11 +21,6 @@ export class ComparisonSlider extends BaseVideoPlayer {
 
         wrapper2.parentNode.insertBefore(clipper, wrapper2);
         clipper.appendChild(wrapper2);
-
-        if (this.captions.length > 1) {
-            this.captions[1].style.right = null;
-            this.captions[1].style.left = '10px';
-        }
 
         const video = this.videos[0];
         video.addEventListener('loadedmetadata', () => {
@@ -123,21 +118,7 @@ export class ThreeVideoComparison extends ComparisonSlider {
         // Get the third video
         const video3 = container.getElementsByTagName('video')[2];
         this.addVideo(video3);
-        this.addCaption(video3, this.wrappers[0]);
-        if (this.captions.length > 2) {
-            this.captions[2].style.bottom = null;
-            this.captions[2].style.top = '5px';
-            this.captions[2].style.right = '5px';
-            this.captions[2].style.zIndex = '5';
-            this.captions[2].style.fontSize = '10px';
-            this.captions[2].style.padding = '2px 4px';
-            this.captions[2].style.borderRadius = '2px';
-            this.captions[2].style.minHeight = 'fit-content';
-            this.captions[2].style.lineHeight = '1.4';
-            this.captions[2].style.wordBreak = 'break-word';
-            this.captions[2].style.maxWidth = '80%';
-        }
-
+        this.addCaption(video3, this.wrappers[0], 'ue-overlay');
 
         // Add the third video to the second wrapper
         this.wrappers[0].appendChild(video3);

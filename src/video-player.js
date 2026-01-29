@@ -44,25 +44,16 @@ export class BaseVideoPlayer {
         });
     }
 
-    addCaption(video, wrapper) {
+    addCaption(video, wrapper, className) {
         // Add caption if uevc-caption attribute exists
         const caption = video.getAttribute('uevc-caption');
         if (caption) {
             const captionDiv = document.createElement('span');
             captionDiv.textContent = caption;
-            captionDiv.style.position = 'absolute';
-            captionDiv.style.bottom = '10px';
-            captionDiv.style.right = '10px';
-            captionDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-            captionDiv.style.color = 'white';
-            captionDiv.style.padding = '5px 10px';
-            captionDiv.style.borderRadius = '4px';
-            captionDiv.style.minHeight = 'fit-content';
-            captionDiv.style.lineHeight = '1.4';
-            captionDiv.style.wordBreak = 'break-word';
-            captionDiv.style.maxWidth = '80%';
-            captionDiv.style.visibility = 'hidden';  // Hide caption initially
-            captionDiv.style.opacity = '0';         // Make fully transparent
+            captionDiv.classList.add('uevc-caption');
+            if (className) {
+                captionDiv.classList.add(className);
+            }
             wrapper.appendChild(captionDiv);
             this.captions.push(captionDiv);
 
@@ -83,7 +74,7 @@ export class BaseVideoPlayer {
         }
     }
 
-    addVideoWithWrapper(video) {
+    addVideoWithWrapper(video, className) {
         const wrapper = document.createElement('div');
         video.parentNode.insertBefore(wrapper, video);
         wrapper.appendChild(video);
@@ -95,7 +86,7 @@ export class BaseVideoPlayer {
         video.style.height = '100%';
         video.style.objectFit = 'contain';
         video.style.maxWidth = 'none';
-        this.addCaption(video, wrapper);
+        this.addCaption(video, wrapper, className);
 
     }
 
