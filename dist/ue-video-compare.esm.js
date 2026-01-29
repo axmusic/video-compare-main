@@ -1,4 +1,5 @@
 /*! UE Video Comparison - v0.0.7 */
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 const SLIDER_CONTAINER_CLASS = 'uevc-slider-container';
 const WIPER_CONTAINER_CLASS = 'uevc-wiper-container';
 const SIDE_BY_SIDE_CONTAINER_CLASS = 'uevc-side-by-side-container';
