@@ -1,13 +1,13 @@
-<div id="{{ id }}" class="uevc-slider-container" data-initial="{{ initial_position }}" data-trigger="{{ trigger_type }}"
-    data-direction="{{ orientation }}" data-viewport-pause="true">
+<div id="{{uc_id}}" class="uevc-slider-container" data-initial="{{initial_position}}" data-trigger="{{trigger_type}}"
+    data-direction="{{orientation}}" data-viewport-pause="true">
 
     {# Video Before #}
-    <video playsinline autoplay muted loop uevc-caption="{{ label_before }}">
-        <source src="{{ video_before }}">
+    <video playsinline autoplay muted loop uevc-caption="{{label_before}}">
+        <source src="{{video_before}}">
     </video>
 
     {# Video After #}
-    <video playsinline autoplay muted loop uevc-caption="{{ label_after }}">
-        <source src="{{ video_after }}">
+    <video playsinline autoplay muted loop uevc-caption="{{label_after}}">
+        <source src="{{video_after}}">
     </video>
 </div>

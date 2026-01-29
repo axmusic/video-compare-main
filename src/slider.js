@@ -121,7 +121,7 @@ export class ComparisonSlider extends BaseVideoPlayer {
         } else {
             this.container.addEventListener('mousemove', trackLocation, false);
             this.container.addEventListener('touchstart', (e) => {
-                // Prevent scrolling when touching the slider in hover mode too (optional, but good for UX)
+                // Prevent scrolling when touching the slider in hover mode
                 e.preventDefault();
                 trackLocation(e);
             }, { passive: false });

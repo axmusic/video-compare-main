@@ -1,5 +1,5 @@
 /*!
-* UE Video Comparison - v0.0.7 
+* UE Video Comparison - v0.1.9 
 * © Unlimited Elements for Elementor, Adarsh Pawar.
 */
 var UEVideoCompare = (function () {
@@ -484,7 +484,7 @@ var UEVideoCompare = (function () {
             } else {
                 this.container.addEventListener('mousemove', trackLocation, false);
                 this.container.addEventListener('touchstart', (e) => {
-                    // Prevent scrolling when touching the slider in hover mode too (optional, but good for UX)
+                    // Prevent scrolling when touching the slider in hover mode
                     e.preventDefault();
                     trackLocation(e);
                 }, { passive: false });
@@ -585,7 +585,8 @@ var UEVideoCompare = (function () {
 
             for (let i = 0; i < containers.length; i++) {
                 const container = containers[i];
-                if (container) {
+                if (container && !container.hasAttribute('data-uevc-initialized')) {
+                    container.setAttribute('data-uevc-initialized', 'true');
                     new ComparisonSlider(container);
                 }
             }
@@ -595,7 +596,8 @@ var UEVideoCompare = (function () {
             );
             for (let i = 0; i < wiperContainers.length; i++) {
                 const container = wiperContainers[i];
-                if (container) {
+                if (container && !container.hasAttribute('data-uevc-initialized')) {
+                    container.setAttribute('data-uevc-initialized', 'true');
                     new ComparisonWiper(container);
                 }
             }
@@ -605,7 +607,8 @@ var UEVideoCompare = (function () {
             );
             for (let i = 0; i < sideBySideContainers.length; i++) {
                 const container = sideBySideContainers[i];
-                if (container) {
+                if (container && !container.hasAttribute('data-uevc-initialized')) {
+                    container.setAttribute('data-uevc-initialized', 'true');
                     new SideBySide(container);
                 }
             }
@@ -615,7 +618,8 @@ var UEVideoCompare = (function () {
             );
             for (let i = 0; i < threeVideoComparisonContainers.length; i++) {
                 const container = threeVideoComparisonContainers[i];
-                if (container) {
+                if (container && !container.hasAttribute('data-uevc-initialized')) {
+                    container.setAttribute('data-uevc-initialized', 'true');
                     new ThreeVideoComparison(container);
                 }
             }
@@ -625,7 +629,8 @@ var UEVideoCompare = (function () {
             );
             for (let i = 0; i < fourGridContainers.length; i++) {
                 const container = fourGridContainers[i];
-                if (container) {
+                if (container && !container.hasAttribute('data-uevc-initialized')) {
+                    container.setAttribute('data-uevc-initialized', 'true');
                     new FourGrid(container);
                 }
             }

@@ -13,7 +13,8 @@ function initUEVideoCompare() {
 
         for (let i = 0; i < containers.length; i++) {
             const container = containers[i];
-            if (container) {
+            if (container && !container.hasAttribute('data-uevc-initialized')) {
+                container.setAttribute('data-uevc-initialized', 'true');
                 new ComparisonSlider(container);
             }
         }
@@ -23,7 +24,8 @@ function initUEVideoCompare() {
         );
         for (let i = 0; i < wiperContainers.length; i++) {
             const container = wiperContainers[i];
-            if (container) {
+            if (container && !container.hasAttribute('data-uevc-initialized')) {
+                container.setAttribute('data-uevc-initialized', 'true');
                 new ComparisonWiper(container);
             }
         }
@@ -33,7 +35,8 @@ function initUEVideoCompare() {
         );
         for (let i = 0; i < sideBySideContainers.length; i++) {
             const container = sideBySideContainers[i];
-            if (container) {
+            if (container && !container.hasAttribute('data-uevc-initialized')) {
+                container.setAttribute('data-uevc-initialized', 'true');
                 new SideBySide(container);
             }
         }
@@ -43,7 +46,8 @@ function initUEVideoCompare() {
         );
         for (let i = 0; i < threeVideoComparisonContainers.length; i++) {
             const container = threeVideoComparisonContainers[i];
-            if (container) {
+            if (container && !container.hasAttribute('data-uevc-initialized')) {
+                container.setAttribute('data-uevc-initialized', 'true');
                 new ThreeVideoComparison(container);
             }
         }
@@ -53,7 +57,8 @@ function initUEVideoCompare() {
         );
         for (let i = 0; i < fourGridContainers.length; i++) {
             const container = fourGridContainers[i];
-            if (container) {
+            if (container && !container.hasAttribute('data-uevc-initialized')) {
+                container.setAttribute('data-uevc-initialized', 'true');
                 new FourGrid(container);
             }
         }
