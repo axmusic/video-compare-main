@@ -6,7 +6,10 @@ import livereload from 'rollup-plugin-livereload';
 
 const isWatch = process.env.ROLLUP_WATCH;
 const version = require('./package.json').version;
-const banner = `/*! UE Video Comparison - v${version} */`;
+const banner = `/*!
+* UE Video Comparison - v${version} 
+* © Unlimited Elements for Elementor, Adarsh Pawar.
+*/`;
 
 export default {
   input: 'src/index.js',
@@ -15,7 +18,8 @@ export default {
       file: 'dist/ue-video-compare.js',
       format: 'iife',
       name: 'UEVideoCompare',
-      banner
+      banner,
+      assetFileNames: '[name][extname]'
     },
     {
       file: 'dist/ue-video-compare.min.js',
@@ -39,7 +43,7 @@ export default {
   ],
   plugins: [
     styles({
-      inline: true,
+      mode: 'extract',
     }),
     isWatch && serve({
       contentBase: '.',
