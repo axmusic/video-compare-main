@@ -46,10 +46,18 @@ export class BaseVideoPlayer {
         video.style.visibility = 'hidden';  // Hide video initially
         video.style.opacity = '0';         // Make fully transparent
         video.addEventListener('loadstart', () => this.resetReadyStates());
-        video.addEventListener('canplaythrough', () => {
+        video.addEventListener('canplay', () => {
             this.readyStates[index] = true;
             this.checkAndPlay();
         });
+
+        // Fail-safe: After 5 seconds, assume it might be ready even if event didn't fire
+        setTimeout(() => {
+            if (!this.readyStates[index]) {
+                this.readyStates[index] = true;
+                this.checkAndPlay();
+            }
+        }, 5000);
     }
 
     addCaption(video, wrapper, className) {
@@ -192,9 +200,32 @@ export class BaseVideoPlayer {
 
     syncVideos(sourceIndex = 0) {
         const sourceVideo = this.videos[sourceIndex];
+
+        // Sync playback state
+        sourceVideo.addEventListener('play', () => {
+            this.videos.forEach((v, i) => {
+                if (i !== sourceIndex && v.paused) v.play();
+            });
+        });
+
+        sourceVideo.addEventListener('pause', () => {
+            this.videos.forEach((v, i) => {
+                if (i !== sourceIndex && !v.paused) v.pause();
+            });
+        });
+
+        // Sync seeking
+        sourceVideo.addEventListener('seeking', () => {
+            this.videos.forEach((v, i) => {
+                if (i !== sourceIndex) v.currentTime = sourceVideo.currentTime;
+            });
+        });
+
+        // Frequent sync check (throttle for performance)
         sourceVideo.addEventListener('timeupdate', () => {
             this.videos.forEach((video, index) => {
-                if (index !== sourceIndex && Math.abs(video.currentTime - sourceVideo.currentTime) > 0.05) {
+                // Use a larger threshold (0.1s) to avoid constant micro-seeking/lags
+                if (index !== sourceIndex && Math.abs(video.currentTime - sourceVideo.currentTime) > 0.1) {
                     video.currentTime = sourceVideo.currentTime;
                 }
             });
