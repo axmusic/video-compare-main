@@ -69,11 +69,11 @@
 }
 
 .uevc-wiper-container>.video-wrapper {
-    width: 99%;
+    width: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    height: 99%;
+    height: 100%;
 }
 
 .uevc-wiper-container>.uevc-wiper-clipper-outer {
@@ -87,12 +87,12 @@
 }
 
 .uevc-wiper-container>.uevc-wiper-clipper-outer>.uevc-wiper-clipper {
-    width: 99%;
+    width: 100%;
     /* leave some space for border */
     position: absolute;
     top: 0;
     left: 0;
-    height: 99%;
+    height: 100%;
     overflow: hidden;
     z-index: 3;
 }
