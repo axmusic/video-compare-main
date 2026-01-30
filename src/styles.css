@@ -1,4 +1,4 @@
-.video-wrapper video {
+.video-wrapper video:not(.ue-third-video) {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -145,11 +145,16 @@
     left: 0;
 }
 
-.uevc-three-video-comparison-container .video-wrapper video {
+.uevc-three-video-comparison-container .video-wrapper video:not(.ue-third-video) {
     width: 100%;
     height: 100%;
     object-fit: cover;
     max-width: none;
+}
+
+.uevc-three-video-comparison-container .ue-third-video {
+    width: 20%;
+    height: 20%;
 }
 
 .uevc-side-by-side-container {
