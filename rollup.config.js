@@ -7,8 +7,10 @@ import livereload from 'rollup-plugin-livereload';
 const isWatch = process.env.ROLLUP_WATCH;
 const version = require('./package.json').version;
 const banner = `/*!
-* UE Video Comparison - v${version} 
-* © Unlimited Elements for Elementor, Adarsh Pawar.
+* UE Video Comparison - v${version}
+* Unlimited Elements for Elementor, Adarsh Pawar.
+* Repository: https://github.com/axmusic/video-compare-main
+* Based on: https://github.com/LiangrunDa/video-compare
 */`;
 
 export default {
