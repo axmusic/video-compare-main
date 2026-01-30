@@ -155,6 +155,10 @@
 .uevc-three-video-comparison-container .ue-third-video {
     width: 20%;
     height: 20%;
+    object-fit: cover;
+    max-width: none;
+    top: 0;
+    right: 0;
 }
 
 .uevc-side-by-side-container {

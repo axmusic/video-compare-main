@@ -1,8 +1,7 @@
 /*!
-* UE Video Comparison - v0.1.11 
+* UE Video Comparison - v0.2.0 
 * © Unlimited Elements for Elementor, Adarsh Pawar.
 */
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 var UEVideoCompare = (function () {
     'use strict';
 
@@ -523,10 +522,10 @@ var UEVideoCompare = (function () {
             /* use CSS instead
             video3.style.width = '20%';
             video3.style.height = '20%';
-            */
-            video3.style.position = 'absolute';
             video3.style.top = '0';
             video3.style.right = '0';
+            */
+            video3.style.position = 'absolute';
             video3.style.zIndex = '4';
 
             // Sync the third video with others

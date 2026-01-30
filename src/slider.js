@@ -159,10 +159,10 @@ export class ThreeVideoComparison extends ComparisonSlider {
         /* use CSS instead
         video3.style.width = '20%';
         video3.style.height = '20%';
-        */
-        video3.style.position = 'absolute';
         video3.style.top = '0';
         video3.style.right = '0';
+        */
+        video3.style.position = 'absolute';
         video3.style.zIndex = '4';
 
         // Sync the third video with others
