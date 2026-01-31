@@ -1,5 +1,5 @@
 /*!
-* UE Video Comparison - v0.2.0
+* UE Video Comparison - v0.2.1
 * Unlimited Elements for Elementor, Adarsh Pawar.
 * Repository: https://github.com/axmusic/video-compare-main
 * Based on: https://github.com/LiangrunDa/video-compare
@@ -290,7 +290,7 @@ var UEVideoCompare = (function () {
             // Monitor video1 progress to trigger animation
             video1.addEventListener('timeupdate', () => {
                 if (!this.animationTriggered && video2.currentTime > duration) {
-                    console.log('triggering animation');
+                    // console.log('triggering animation');
                     requestAnimationFrame(() => {
                         clipperOuter.style.backgroundColor = 'white';
                     });

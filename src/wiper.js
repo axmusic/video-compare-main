@@ -42,7 +42,7 @@ export class ComparisonWiper extends BaseVideoPlayer {
         // Monitor video1 progress to trigger animation
         video1.addEventListener('timeupdate', () => {
             if (!this.animationTriggered && video2.currentTime > duration) {
-                console.log('triggering animation');
+                // console.log('triggering animation');
                 requestAnimationFrame(() => {
                     clipperOuter.style.backgroundColor = 'white';
                 });
