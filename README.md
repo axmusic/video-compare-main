@@ -19,10 +19,10 @@ Add the JS and CSS to your project:
 
 ```html
 <!-- Styles -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ue-video-compare/dist/ue-video-compare.css">
+<link rel="stylesheet" href="/dist/ue-video-compare.css">
 
 <!-- Script -->
-<script src="https://cdn.jsdelivr.net/npm/ue-video-compare/dist/ue-video-compare.min.js"></script>
+<script src="/dist/ue-video-compare.min.js"></script>
 ```
 
 ## Basic Usage
@@ -63,6 +63,8 @@ Apply these to the main container `<div>`:
 | `data-play-mode` | `auto`, `interaction`, `manual` | `auto` | `interaction`: Play on first hover. `manual`: Play only while hovering. |
 | `data-viewport-pause`| `true`, `false` | `false` | If `true`, pauses video off-screen to save CPU/Battery. |
 | `data-handle-type` | `bar`, `arrows`, `icon` | (none) | Visual style of the slider handle. |
+| `data-show-loading` | `true`, `false` | `true` | Set to `false` to disable the loading screen and prevent fallback HTML creation. |
+| `data-debug-loading` | `true`, `false` | `false` | Set to `true` to force the loading screen to stay visible (requires `data-show-loading` to be `true`). |
 
 ### Data Attributes (Wiper Mode)
 - `data-duration`: Seconds to wait before starting the wipe (Default: `1.0`).
@@ -89,8 +91,10 @@ If you are adding containers dynamically via JavaScript, you can re-run the init
 UEVideoCompare();
 ```
 
+## By 
+
+@axmusic (Ax Adarsh Pawar),  Unlimited Elements for Elementor, @LiangrunDa (Liangrun Da)
+
 ## License
 
 MIT License 
-
-## Ax Adarsh Pawar, Unlimited Elements for Elementor

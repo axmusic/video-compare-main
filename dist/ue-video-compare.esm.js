@@ -4,6 +4,7 @@
 * Repository: https://github.com/axmusic/video-compare-main
 * Based on: https://github.com/LiangrunDa/video-compare
 */
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 const SLIDER_CONTAINER_CLASS = 'uevc-slider-container';
 const WIPER_CONTAINER_CLASS = 'uevc-wiper-container';
 const SIDE_BY_SIDE_CONTAINER_CLASS = 'uevc-side-by-side-container';
@@ -21,32 +22,39 @@ class BaseVideoPlayer {
         // Read playback options
         this.playMode = this.container.getAttribute('data-play-mode') || 'auto';
         this.viewportPause = this.container.getAttribute('data-viewport-pause') === 'true';
+        this.debugLoading = this.container.getAttribute('data-debug-loading') === 'true';
+        this.showLoading = this.container.getAttribute('data-show-loading') !== 'false';
         this.hasInteracted = false;
         this.playModeSetup = false;
         this.viewportObserverSetup = false;
         this.isIntersecting = true; // Assume visible initially
 
-        this.loadingElement = document.createElement('div');
-        this.loadingElement.textContent = 'Loading';
-        this.loadingElement.style.position = 'absolute';
-        this.loadingElement.style.top = '50%';
-        this.loadingElement.style.left = '50%';
-        this.loadingElement.style.transform = 'translate(-50%, -50%)';
-        this.loadingElement.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-        this.loadingElement.style.color = 'white';
-        this.loadingElement.style.padding = '10px 20px';
-        this.loadingElement.style.borderRadius = '4px';
-        this.loadingElement.style.zIndex = '4';
-        this.container.appendChild(this.loadingElement);
+        // Find existing loading element
+        this.loadingElement = this.container.querySelector('.uevc-loading-wrapper');
 
-        this.loadingDots = 0;
-        this.loadingInterval = setInterval(() => this.animateLoading(), 500);
-    }
+        // If showLoading is false, hide existing loading element and exit
+        if (!this.showLoading) {
+            if (this.loadingElement) {
+                this.loadingElement.style.display = 'none';
+            }
+            return;
+        }
 
-    animateLoading() {
-        if (!this.loadingElement) return;
-        this.loadingDots = (this.loadingDots + 1) % 4;
-        this.loadingElement.textContent = 'Loading' + '.'.repeat(this.loadingDots);
+        // Only create fallback if showLoading is true and it doesn't already exist
+        if (!this.loadingElement) {
+            this.loadingElement = document.createElement('div');
+            this.loadingElement.classList.add('uevc-loading-wrapper');
+            const loadingText = document.createElement('div');
+            loadingText.classList.add('uevc-loading');
+            loadingText.textContent = 'Loading';
+            this.loadingElement.appendChild(loadingText);
+            this.container.appendChild(this.loadingElement);
+        }
+
+        // Show loading initially if showLoading is true
+        if (this.loadingElement) {
+            this.loadingElement.style.display = 'flex';
+        }
     }
 
     addVideo(video) {
@@ -118,9 +126,8 @@ class BaseVideoPlayer {
         this.readyStates.fill(false);
         this.videos.forEach(video => video.pause());
         this.videos.forEach(video => video.currentTime = 0);
-        this.loadingElement.style.display = 'block';
-        if (!this.loadingInterval) {
-            this.loadingInterval = setInterval(() => this.animateLoading(), 500);
+        if (this.showLoading && this.loadingElement) {
+            this.loadingElement.style.display = 'flex';
         }
     }
 
@@ -135,9 +142,10 @@ class BaseVideoPlayer {
                 caption.style.visibility = 'visible';
                 caption.style.opacity = '1';
             });
-            this.loadingElement.style.display = 'none';
-            clearInterval(this.loadingInterval);
-            this.loadingInterval = null;
+
+            if (this.showLoading && this.loadingElement && !this.debugLoading) {
+                this.loadingElement.style.display = 'none';
+            }
 
             // Play videos based on play mode, but only if visible (if viewportPause enabled)
             if (this.playMode === 'auto') {

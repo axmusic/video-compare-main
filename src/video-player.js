@@ -9,32 +9,39 @@ export class BaseVideoPlayer {
         // Read playback options
         this.playMode = this.container.getAttribute('data-play-mode') || 'auto';
         this.viewportPause = this.container.getAttribute('data-viewport-pause') === 'true';
+        this.debugLoading = this.container.getAttribute('data-debug-loading') === 'true';
+        this.showLoading = this.container.getAttribute('data-show-loading') !== 'false';
         this.hasInteracted = false;
         this.playModeSetup = false;
         this.viewportObserverSetup = false;
         this.isIntersecting = true; // Assume visible initially
 
-        this.loadingElement = document.createElement('div');
-        this.loadingElement.textContent = 'Loading';
-        this.loadingElement.style.position = 'absolute';
-        this.loadingElement.style.top = '50%';
-        this.loadingElement.style.left = '50%';
-        this.loadingElement.style.transform = 'translate(-50%, -50%)';
-        this.loadingElement.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-        this.loadingElement.style.color = 'white';
-        this.loadingElement.style.padding = '10px 20px';
-        this.loadingElement.style.borderRadius = '4px';
-        this.loadingElement.style.zIndex = '4';
-        this.container.appendChild(this.loadingElement);
+        // Find existing loading element
+        this.loadingElement = this.container.querySelector('.uevc-loading-wrapper');
 
-        this.loadingDots = 0;
-        this.loadingInterval = setInterval(() => this.animateLoading(), 500);
-    }
+        // If showLoading is false, hide existing loading element and exit
+        if (!this.showLoading) {
+            if (this.loadingElement) {
+                this.loadingElement.style.display = 'none';
+            }
+            return;
+        }
 
-    animateLoading() {
-        if (!this.loadingElement) return;
-        this.loadingDots = (this.loadingDots + 1) % 4;
-        this.loadingElement.textContent = 'Loading' + '.'.repeat(this.loadingDots);
+        // Only create fallback if showLoading is true and it doesn't already exist
+        if (!this.loadingElement) {
+            this.loadingElement = document.createElement('div');
+            this.loadingElement.classList.add('uevc-loading-wrapper');
+            const loadingText = document.createElement('div');
+            loadingText.classList.add('uevc-loading');
+            loadingText.textContent = 'Loading';
+            this.loadingElement.appendChild(loadingText);
+            this.container.appendChild(this.loadingElement);
+        }
+
+        // Show loading initially if showLoading is true
+        if (this.loadingElement) {
+            this.loadingElement.style.display = 'flex';
+        }
     }
 
     addVideo(video) {
@@ -106,9 +113,8 @@ export class BaseVideoPlayer {
         this.readyStates.fill(false);
         this.videos.forEach(video => video.pause());
         this.videos.forEach(video => video.currentTime = 0);
-        this.loadingElement.style.display = 'block';
-        if (!this.loadingInterval) {
-            this.loadingInterval = setInterval(() => this.animateLoading(), 500);
+        if (this.showLoading && this.loadingElement) {
+            this.loadingElement.style.display = 'flex';
         }
     }
 
@@ -123,9 +129,10 @@ export class BaseVideoPlayer {
                 caption.style.visibility = 'visible';
                 caption.style.opacity = '1';
             });
-            this.loadingElement.style.display = 'none';
-            clearInterval(this.loadingInterval);
-            this.loadingInterval = null;
+
+            if (this.showLoading && this.loadingElement && !this.debugLoading) {
+                this.loadingElement.style.display = 'none';
+            }
 
             // Play videos based on play mode, but only if visible (if viewportPause enabled)
             if (this.playMode === 'auto') {
