@@ -347,7 +347,7 @@
                 <p>Move your mouse or touch the screen to slide the white divider line. (Initial position set to 20%)
                 </p>
 
-                <div class="uevc-slider-container" data-initial="20" data-viewport-pause="true">
+                <div class="uevc-slider-container" data-initial="20" data-viewport-pause="true" data-handle-type="bar">
                     <video playsinline autoplay muted loop uevc-caption="Before">
                         <source src="./media/video_20260129_174240.mp4">
                     </video>
@@ -395,8 +395,8 @@
                 <p>Use <code>data-show-loading="false"</code> to completely prevent ANY loading screen.
                 </p>
 
-                <div class="uevc-slider-container" data-initial="50" data-viewport-pause="true"
-                    data-show-loading="false">
+                <div class="uevc-slider-container" data-handle-type="arrows" data-initial="50"
+                    data-viewport-pause="true" data-show-loading="false">
                     <video playsinline autoplay muted loop uevc-caption="Before">
                         <source src="./media/video_20260129_174240.mp4">
                     </video>
@@ -412,7 +412,15 @@
                 <h2>Slider Comparison (Click/Drag)</h2>
                 <p>Click and drag to slide the white divider line. Hovering will not move the slider.</p>
 
-                <div class="uevc-slider-container" data-trigger="click" data-viewport-pause="true">
+                <div class="uevc-slider-container" data-handle-type="icon" data-trigger="click"
+                    data-viewport-pause="true">
+                    <div class="uevc-handle-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 8L22 12L18 16M6 8L2 12L6 16M2 12H22" />
+                        </svg>
+                    </div>
+
                     <video playsinline autoplay muted loop uevc-caption="Baseline">
                         <source src="./media/video_20260129_174240.mp4">
                     </video>
@@ -440,7 +448,8 @@
                 <h2>Slider Comparison (Vertical)</h2>
                 <p>Compare videos vertically.</p>
 
-                <div class="uevc-slider-container" data-direction="vertical" data-viewport-pause="true">
+                <div class="uevc-slider-container" data-direction="vertical" data-handle-type="arrows"
+                    data-viewport-pause="true">
                     <video playsinline autoplay muted loop uevc-caption="Baseline">
                         <source src="./media/video_20260129_174240.mp4">
                     </video>
@@ -471,7 +480,7 @@
                 <p>Compare three videos with a slider and a small overlay video in the top-right corner(Picture in
                     picture).</p>
 
-                <div class="uevc-three-video-comparison-container" data-viewport-pause="true">
+                <div class="uevc-three-video-comparison-container" data-viewport-pause="true" data-handle-type="arrows">
                     <video playsinline autoplay muted loop uevc-caption="Baseline">
                         <source src="./media/video_20260129_174240.mp4">
                     </video>
@@ -563,7 +572,8 @@
 
                 <h3>1. Auto (Default)</h3>
                 <p>Videos play automatically and loop.</p>
-                <div class="uevc-slider-container" data-play-mode="auto" data-initial="30" data-viewport-pause="true">
+                <div class="uevc-slider-container" data-play-mode="auto" data-handle-type="arrows" data-initial="30"
+                    data-viewport-pause="true">
                     <video playsinline autoplay muted loop uevc-caption="Baseline">
                         <source src="./media/video_20260129_174240.mp4">
                     </video>
@@ -578,8 +588,8 @@
 
                 <h3>2. Start on Interaction</h3>
                 <p>Videos start paused and begin playing when first hovered or touched.</p>
-                <div class="uevc-slider-container" data-play-mode="interaction" data-initial="30"
-                    data-viewport-pause="true">
+                <div class="uevc-slider-container" data-play-mode="interaction" data-handle-type="arrows"
+                    data-initial="30" data-viewport-pause="true">
                     <video playsinline autoplay muted loop uevc-caption="Baseline">
                         <source src="./media/video_20260129_174240.mp4">
                     </video>
@@ -594,7 +604,8 @@
 
                 <h3>3. Only Play While Interacting (Manual)</h3>
                 <p>Videos only play when the mouse is over the container or while touching it.</p>
-                <div class="uevc-slider-container" data-play-mode="manual" data-initial="30" data-viewport-pause="true">
+                <div class="uevc-slider-container" data-play-mode="manual" data-handle-type="arrows" data-initial="30"
+                    data-viewport-pause="true">
                     <video playsinline autoplay muted loop uevc-caption="Baseline">
                         <source src="./media/video_20260129_174240.mp4">
                     </video>
@@ -617,11 +628,18 @@
                 <pre><code class="html">&lt;div class="uevc-slider-container" data-viewport-pause="true"&gt;...&lt;/div&gt;</code></pre>
 
                 <div
-                    style="height: 50vh; display: flex; align-items: center; justify-content: center; background: #f1f5f9; margin: 20px 0; border-radius: 8px; border: 1px dashed var(--border);">
+                    style="height: 80vh; display: flex; align-items: center; justify-content: center; background: #f1f5f9; margin: 20px 0; border-radius: 8px; border: 1px dashed var(--border);">
                     <p style="margin: 0; font-weight: 500;">⬇ Scroll down to see the video slider ⬇</p>
                 </div>
 
-                <div class="uevc-slider-container" data-viewport-pause="true" data-initial="70">
+                <div class="uevc-slider-container" data-handle-type="icon" data-viewport-pause="true" data-initial="70">
+                    <div class="uevc-handle-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 8L22 12L18 16M6 8L2 12L6 16M2 12H22" />
+                        </svg>
+                    </div>
+
                     <video playsinline autoplay muted loop uevc-caption="Baseline">
                         <source src="./media/video_20260129_174240.mp4">
                     </video>
