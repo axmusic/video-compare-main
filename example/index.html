@@ -373,30 +373,45 @@
         <div class="tab-content" data-tab="loading">
             <div class="demo-card">
                 <h2>Loading State Control</h2>
-                <p>Control the appearance and behavior of the loading screen.</p>
+                <p>You can customize the loading experience or disable it entirely using data attributes.</p>
 
-                <h3>1. Debug Loading Mode (Stays visible)</h3>
-                <p>Use <code>data-debug-loading="true"</code> to keep the loading screen visible for styling.</p>
+                <h3>1. Customizable Loading Screen</h3>
+                <p>Wrap your own spinner or text inside <code>uevc-loading-wrapper</code>. This will disappear once
+                    videos are ready.</p>
 
-                <div class="uevc-slider-container" data-initial="50" data-viewport-pause="true" data-show-loading="true"
-                    data-debug-loading="true">
+                <div class="uevc-slider-container" data-initial="50" data-show-loading="true">
+                    <div class="uevc-loading-wrapper">
+                        <div class="uevc-loading">
+                            <i class="fas fa-spinner fa-spin"></i> Initializing Media...
+                        </div>
+                    </div>
                     <video playsinline autoplay muted loop uevc-caption="Before">
                         <source src="./media/video_20260129_174240.mp4">
                     </video>
                     <video playsinline autoplay muted loop uevc-caption="After">
                         <source src="./media/video_20260129_174204.mp4">
                     </video>
+                </div>
+
+                <pre><code class="html">&lt;div class="uevc-slider-container" data-show-loading="true"&gt;
+    &lt;div class="uevc-loading-wrapper"&gt;
+        &lt;div class="uevc-loading"&gt;
+            &lt;i class="fas fa-spinner fa-spin"&gt;&lt;/i&gt; Initializing Media...
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- videos here --&gt;
+&lt;/div&gt;</code></pre>
+
+                <hr style="margin: 2rem 0; border: 0; border-top: 1px solid var(--border);">
+
+                <h3>2. Debug Loading Mode</h3>
+                <p>Use <code>data-debug-loading="true"</code> to keep the loading screen visible indefinitely for
+                    styling purposes.</p>
+
+                <div class="uevc-slider-container" data-initial="50" data-debug-loading="true">
                     <div class="uevc-loading-wrapper">
                         <div class="uevc-loading">Debug Mode Active</div>
                     </div>
-                </div>
-
-                <h3>2. Loading Screen Disabled</h3>
-                <p>Use <code>data-show-loading="false"</code> to completely prevent ANY loading screen.
-                </p>
-
-                <div class="uevc-slider-container" data-handle-type="arrows" data-initial="50"
-                    data-viewport-pause="true" data-show-loading="false">
                     <video playsinline autoplay muted loop uevc-caption="Before">
                         <source src="./media/video_20260129_174240.mp4">
                     </video>
@@ -404,6 +419,32 @@
                         <source src="./media/video_20260129_174204.mp4">
                     </video>
                 </div>
+
+                <pre><code class="html">&lt;div class="uevc-slider-container" data-debug-loading="true"&gt;
+    &lt;div class="uevc-loading-wrapper"&gt;
+        &lt;div class="uevc-loading"&gt;Debug Mode Active&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <hr style="margin: 2rem 0; border: 0; border-top: 1px solid var(--border);">
+
+                <h3>3. Loading Screen Disabled</h3>
+                <p>Use <code>data-show-loading="false"</code> to completely prevent ANY loading screen from appearing.
+                </p>
+
+                <div class="uevc-slider-container" data-initial="50" data-show-loading="false">
+                    <video playsinline autoplay muted loop uevc-caption="Before">
+                        <source src="./media/video_20260129_174240.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="After">
+                        <source src="./media/video_20260129_174204.mp4">
+                    </video>
+                </div>
+
+                <pre><code class="html">&lt;div class="uevc-slider-container" data-show-loading="false"&gt;
+    &lt;!-- No loading wrapper needed --&gt;
+    &lt;video&gt;...&lt;/video&gt;
+&lt;/div&gt;</code></pre>
             </div>
         </div>
 
