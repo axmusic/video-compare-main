@@ -93,7 +93,7 @@ UEVideoCompare();
 
 ## By 
 
-@axmusic (Ax Adarsh Pawar),  Unlimited Elements for Elementor, @LiangrunDa (Liangrun Da)
+@AxMusic (Ax Adarsh Pawar),  Unlimited Elements for Elementor, @LiangrunDa (Liangrun Da)
 
 ## License
 
