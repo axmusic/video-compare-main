@@ -8,7 +8,7 @@ export class BaseVideoPlayer {
 
         // Read playback options
         this.playMode = this.container.getAttribute('data-play-mode') || 'auto';
-        this.viewportPause = this.container.getAttribute('data-viewport-pause') === 'true';
+        this.viewportPause = this.container.getAttribute('data-viewport-pause') !== 'false';
         this.debugLoading = this.container.getAttribute('data-debug-loading') === 'true';
         this.showLoading = this.container.getAttribute('data-show-loading') !== 'false';
         this.hasInteracted = false;

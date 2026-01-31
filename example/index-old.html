@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Compare Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/html.min.js"></script>
+    <link rel="stylesheet" href="./css/ue-video-compare.css">
+    <script src="./js/ue-video-compare.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .demo-section {
+            margin-bottom: 40px;
+            max-width: 700px;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            padding-top: 1rem;
+            padding-bottom: 2rem;
+            padding-left: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            margin-bottom: 2rem;
+        }
+
+        pre {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .demo-container {
+            margin: 20px 0;
+        }
+
+        /* Add new tab styles */
+        .tabs {
+            max-width: 700px;
+            margin: 20px auto;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            border: none;
+            background: #f0f0f0;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .tab-button.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .donate-banner {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 4rem;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .donate-text {
+            margin-right: 20px;
+        }
+
+        .donate-button {
+            background: #ff9447;
+            color: white;
+            text-decoration: none;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.2s;
+            white-space: nowrap;
+        }
+
+        .donate-button:hover {
+            background: #ff6b81;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            background: #2f3542;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .footer h3 {
+            margin-bottom: 15px;
+            color: #74ebd5;
+        }
+
+        .footer p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .footer .donate-button {
+            display: inline-block;
+            padding: 10px 25px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Video Compare Library Demo</h1>
+        <div class="donate-banner">
+            <span class="donate-text">Found it useful? Donations help maintain and improve it!</span>
+            <a href="https://github.com/sponsors/axmusic" class="donate-button">Donate Now</a>
+        </div>
+
+    </div>
+
+    <div class="demo-section">
+        <h2>Load the library</h2>
+        <pre><code class="html">&lt;link rel="stylesheet" href="/dist/ue-video-compare.css"&gt;
+&lt;script src="dist/ue-video-compare.min.js"&gt;&lt;/script&gt;</code></pre>
+    </div>
+
+    <div class="tabs">
+        <div class="tab-buttons">
+            <button class="tab-button active" data-tab="slider">Slider (Hover)</button>
+            <button class="tab-button" data-tab="click-slider">Slider (Click)</button>
+            <button class="tab-button" data-tab="vertical-slider">Slider (Vertical)</button>
+            <button class="tab-button" data-tab="vertical-click-slider">Slider (Vertical + Click)</button>
+            <button class="tab-button" data-tab="three-video">Three Video</button>
+            <button class="tab-button" data-tab="wiper">Wiper</button>
+            <button class="tab-button" data-tab="side">Side by Side</button>
+            <button class="tab-button" data-tab="play-modes">Play Modes</button>
+            <button class="tab-button" data-tab="performance">Performance</button>
+            <button class="tab-button" data-tab="loading">Loading Control</button>
+            <button class="tab-button" data-tab="handles">Handles</button>
+        </div>
+
+        <div class="tab-content active" data-tab="slider">
+            <h2>1. Slider Comparison (Hover - Default)</h2>
+            <p>Move your mouse or touch the screen to slide the white divider line. (Initial position set to 20%)</p>
+            <pre><code class="html">
+&lt;div class="uevc-slider-container" data-initial="20"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Before"&gt;
+        &lt;source src="./videos/video1.webm"&gt;
+    &lt;/video&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="After"&gt;
+        &lt;source src="./videos/video2.webm"&gt;
+    &lt;/video&gt;
+&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-slider-container" data-initial="20" data-viewport-pause="true">
+                    <video playsinline autoplay muted loop uevc-caption="Before">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174240.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="After">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174204.mp4">
+                    </video>
+                    <div class="uevc-loading-wrapper">
+                        <div class="uevc-loading">Loading Video</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" data-tab="loading">
+            <h2>Loading State Control</h2>
+            <p>Control the appearance and behavior of the loading screen.</p>
+
+            <div class="demo-container">
+                <h3>1. Debug Loading Mode (Stays visible)</h3>
+                <p>Use <code>data-debug-loading="true"</code> to keep the loading screen visible for styling.</p>
+                <div class="uevc-slider-container" data-initial="50" data-viewport-pause="true" data-show-loading="true"
+                    data-debug-loading="true">
+                    <video playsinline autoplay muted loop uevc-caption="Before">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174240.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="After">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174204.mp4">
+                    </video>
+                    <div class="uevc-loading-wrapper">
+                        <div class="uevc-loading">Debug Mode Active</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-container">
+                <h3>2. Loading Screen Disabled</h3>
+                <p>Use <code>data-show-loading="false"</code> to completely prevent ANY loading screen (even fallbacks).
+                </p>
+                <div class="uevc-slider-container" data-initial="50" data-viewport-pause="true"
+                    data-show-loading="false">
+                    <video playsinline autoplay muted loop uevc-caption="Before">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174240.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="After">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174204.mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" data-tab="click-slider">
+            <h2>Slider Comparison (Click/Drag)</h2>
+            <p>Click and drag to slide the white divider line. Hovering will not move the slider.</p>
+            <pre><code class="html">
+&lt;div class="uevc-slider-container" data-trigger="click"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Baseline"&gt;
+        &lt;source src="./videos/video1.webm"&gt;
+    &lt;/video&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Ours"&gt;
+        &lt;source src="./videos/video2.webm"&gt;
+    &lt;/video&gt;
+&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-slider-container" data-trigger="click" data-viewport-pause="true">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <div class="uevc-loading-wrapper">
+                        <div class="uevc-loading">Loading</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" data-tab="vertical-slider">
+            <h2>Slider Comparison (Vertical)</h2>
+            <p>Compare videos vertically.</p>
+            <pre><code class="html">
+&lt;div class="uevc-slider-container" data-direction="vertical"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Baseline"&gt;
+        &lt;source src="./videos/video1.webm"&gt;
+    &lt;/video&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Ours"&gt;
+        &lt;source src="./videos/video2.webm"&gt;
+    &lt;/video&gt;
+&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-slider-container" data-direction="vertical" data-viewport-pause="true">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <div class="uevc-loading-wrapper">
+                        <div class="uevc-loading">Loading</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" data-tab="vertical-click-slider">
+            <h2>Slider Comparison (Vertical + Click)</h2>
+            <p>Compare videos vertically using click/drag.</p>
+            <pre><code class="html">
+&lt;div class="uevc-slider-container" data-direction="vertical" data-trigger="click"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Baseline"&gt;
+        &lt;source src="./videos/video1.webm"&gt;
+    &lt;/video&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Ours"&gt;
+        &lt;source src="./videos/video2.webm"&gt;
+    &lt;/video&gt;
+&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-slider-container" data-direction="vertical" data-trigger="click"
+                    data-viewport-pause="true">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <div class="uevc-loading-wrapper">
+                        <div class="uevc-loading">Loading</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" data-tab="three-video">
+            <h2>Three Video Comparison</h2>
+            <p>Compare three videos with a slider and a small overlay video in the top-right corner.</p>
+            <pre><code class="html">
+&lt;div class="uevc-three-video-comparison-container"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Baseline"&gt;
+        &lt;source src="./videos/video1.webm"&gt;
+    &lt;/video&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Ours"&gt;
+        &lt;source src="./videos/video2.webm"&gt;
+    &lt;/video&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Overlay"&gt;
+        &lt;source src="./videos/video1.webm"&gt;
+    &lt;/video&gt;
+&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-three-video-comparison-container" data-viewport-pause="true">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video class="ue-third-video" playsinline autoplay muted loop uevc-caption="Overlay">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <div class="uevc-loading-wrapper">
+                        <div class="uevc-loading">Loading</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" data-tab="wiper">
+            <h2>2. Wiper Comparison</h2>
+            <p>Video plays for 2 seconds, then a 1.5-second wipe transition reveals the second video.</p>
+            <pre><code class="html">
+&lt;div class="uevc-wiper-container" data-duration="2" data-transition-duration="1500"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Baseline"&gt;
+        &lt;source src="./videos/video1.webm"&gt;
+    &lt;/video&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Ours"&gt;
+        &lt;source src="./videos/video2.webm"&gt;
+    &lt;/video&gt;
+&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-wiper-container" data-duration="3" data-transition-duration="1500"
+                    data-viewport-pause="true">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <div class="uevc-loading-wrapper">
+                        <div class="uevc-loading">Loading</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="tab-content" data-tab="side">
+            <h2>3. Side by Side Comparison</h2>
+            <pre><code class="html">
+&lt;div class="uevc-side-by-side-container"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Baseline"&gt;
+        &lt;source src="./videos/video1.webm"&gt;
+    &lt;/video&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Ours"&gt;
+        &lt;source src="./videos/video2.webm"&gt;
+    &lt;/video&gt;
+&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-side-by-side-container" data-viewport-pause="true">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <div class="uevc-loading-wrapper">
+                        <div class="uevc-loading">Loading</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content" data-tab="play-modes">
+            <h2>Playback Modes</h2>
+            <p>Control when the videos start playing.</p>
+
+            <h3>1. Auto (Default)</h3>
+            <p>Videos play automatically and loop.</p>
+            <pre><code class="html">&lt;div class="uevc-slider-container" data-play-mode="auto"&gt;...&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-slider-container" data-play-mode="auto" data-initial="30" data-viewport-pause="true">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <div class="uevc-loading-wrapper">
+                        <div class="uevc-loading">Loading</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>2. Start on Interaction</h3>
+            <p>Videos start paused and begin playing when first hovered or touched.</p>
+            <pre><code class="html">&lt;div class="uevc-slider-container" data-play-mode="interaction"&gt;...&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-slider-container" data-play-mode="interaction" data-initial="30"
+                    data-viewport-pause="true">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <div class="uevc-loading-wrapper">
+                        <div class="uevc-loading">Loading</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>3. Only Play While Interacting (Manual)</h3>
+            <p>Videos only play when the mouse is over the container or while touching it.</p>
+            <pre><code class="html">&lt;div class="uevc-slider-container" data-play-mode="manual"&gt;...&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-slider-container" data-play-mode="manual" data-initial="30" data-viewport-pause="true">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <div class="uevc-loading-wrapper">
+                        <div class="uevc-loading">Loading</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" data-tab="performance">
+            <h2>Performance Optimization</h2>
+            <p>Automatically pause videos when they are not in the viewport to save resources (CPU/GPU).</p>
+
+            <pre><code class="html">&lt;div class="uevc-slider-container" data-viewport-pause="true"&gt;...&lt;/div&gt;</code></pre>
+
+            <div
+                style="height: 100vh; display: flex; align-items: center; justify-content: center; background: #f0f0f0; margin: 20px 0; border-radius: 8px;">
+                <p>Scroll down to see the video slider...</p>
+            </div>
+
+            <div class="demo-container">
+                <div class="uevc-slider-container" data-viewport-pause="true" data-initial="70">
+                    <video playsinline autoplay muted loop uevc-caption="Baseline">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/2dgs/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Ours">
+                        <source
+                            src="https://genapi.sibowu.com/website/resources/videos/dl3dv/ours/0a1b7c20a92c43c6b8954b1ac909fb2f0fa8b2997b80604bc8bbec80a1cb2da3.mp4">
+                    </video>
+                    <div class="uevc-loading-wrapper">
+                        <div class="uevc-loading">Loading</div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                style="height: 100vh; display: flex; align-items: center; justify-content: center; background: #f0f0f0; margin: 20px 0; border-radius: 8px;">
+                <p>Scroll up or down to pause the video above.</p>
+            </div>
+        </div>
+        <div class="tab-content" data-tab="handles">
+            <h2>Customizable Slider Handles</h2>
+            <p>Choose from preset handle styles or provide your own custom icon.</p>
+
+            <h3>1. Rectangular Bar</h3>
+            <pre><code class="html">&lt;div class="uevc-slider-container" data-handle-type="bar"&gt;...&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-slider-container" data-handle-type="bar" data-initial="30" data-viewport-pause="true">
+                    <video playsinline autoplay muted loop uevc-caption="Before">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174240.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="After">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174204.mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>2. Horizontal Arrows</h3>
+            <pre><code class="html">&lt;div class="uevc-slider-container" data-handle-type="arrows"&gt;...&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <div class="uevc-slider-container" data-handle-type="arrows" data-initial="50"
+                    data-viewport-pause="true">
+                    <video playsinline autoplay muted loop uevc-caption="Before">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174240.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="After">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174204.mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>3. Custom Icon (FontAwesome or SVG)</h3>
+            <p>Place an element with class <code>uevc-handle-icon</code> inside your container.</p>
+            <pre><code class="html">&lt;div class="uevc-slider-container" data-handle-type="icon"&gt;
+    &lt;div class="uevc-handle-icon"&gt;&lt;i class="fas fa-arrows-alt-h"&gt;&lt;/i&gt;&lt;/div&gt;
+    ...
+&lt;/div&gt;</code></pre>
+            <div class="demo-container">
+                <!-- Using a simple SVG as an icon example -->
+                <div class="uevc-slider-container" data-handle-type="icon" data-initial="70" data-viewport-pause="true">
+                    <div class="uevc-handle-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 8L22 12L18 16M6 8L2 12L6 16M2 12H22" />
+                        </svg>
+                    </div>
+                    <video playsinline autoplay muted loop uevc-caption="Before">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174240.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="After">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174204.mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>4. Vertical Slider with Handles</h3>
+            <div class="demo-container" style="height: 500px;">
+                <div class="uevc-slider-container" data-direction="vertical" data-handle-type="arrows" data-initial="40"
+                    data-viewport-pause="true">
+                    <video playsinline autoplay muted loop uevc-caption="Top">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174240.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="Bottom">
+                        <source src="https://developer.axwon.co/wp-content/uploads/2026/01/video_20260129_174204.mp4">
+                    </video>
+                    <div class="uevc-loading-wrapper">
+                        <div class="uevc-loading">Loading</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="donate-banner">
+            <span class="donate-text">Found it useful? Donations help maintain and improve it!</span>
+            <a href="https://github.com/sponsors/axmusic" class="donate-button">Donate Now </a>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                hljs.highlightAll();
+
+                // Add tab functionality
+                const tabButtons = document.querySelectorAll('.tab-button');
+                const tabContents = document.querySelectorAll('.tab-content');
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabName = button.dataset.tab;
+
+                        // Update active states
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        tabContents.forEach(content => content.classList.remove('active'));
+
+                        button.classList.add('active');
+                        document.querySelector(`.tab-content[data-tab="${tabName}"]`).classList.add('active');
+                    });
+                });
+            });
+        </script>
+        <script data-name="BMC-Widget" data-cfasync="false"
+            src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="axpawar"
+            data-description="Support me on Buy me a coffee!"
+            data-message="Your support motivates us. helps keep it improving ❤️." data-color="#FF813F"
+            data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+</body>
+
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UE Video Comparison - Documentation</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* RESET & BASE STYLES */
+        :root {
+            --primary: #4f46e5;
+            /* Indigo */
+            --primary-dark: #4338ca;
+            --accent: #f43f5e;
+            /* Rose */
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-sidebar: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --code-bg: #1e293b;
+            --code-text: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* LAYOUT */
+        .page-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR NAVIGATION */
+        .sidebar {
+            width: 260px;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            padding: 2rem 1.5rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            flex-shrink: 0;
+            display: none;
+            /* Hidden on mobile by default */
+        }
+
+        @media (min-width: 900px) {
+            .sidebar {
+                display: block;
+            }
+        }
+
+        .brand {
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            display: block;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            margin-bottom: 0.25rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            background-color: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background-color: #e0e7ff;
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        /* MAIN CONTENT */
+        .content {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 900px) {
+            .content {
+                padding: 4rem;
+            }
+        }
+
+        /* HERO SECTION */
+        .hero {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0 0 1rem 0;
+            letter-spacing: -0.03em;
+            color: var(--text-main);
+        }
+
+        .lead {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            max-width: 700px;
+        }
+
+        /* CONTENT STYLES */
+        h2 {
+            font-size: 1.75rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-main);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* FEATURE GRID */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+        }
+
+        .feature-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        /* CODE BLOCKS */
+        pre {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.25rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 1.5rem 0;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        p code,
+        li code {
+            background: #e2e8f0;
+            color: #d63384;
+            /* Pinkish for inline code */
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+
+        /* TABLES */
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            font-size: 0.95rem;
+        }
+
+        th,
+        td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: var(--text-main);
+            white-space: nowrap;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        td:first-child code {
+            color: var(--primary);
+            background: rgba(79, 70, 229, 0.1);
+        }
+
+        /* BADGES / PILLS */
+        .badge {
+            display: inline-block;
+            padding: 0.25em 0.6em;
+            font-size: 0.75rem;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 10rem;
+            color: #fff;
+            background-color: var(--primary);
+        }
+
+        .badge-light {
+            color: var(--text-main);
+            background-color: #e2e8f0;
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .author-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* MOBILE NAV TRIGGER */
+        .mobile-nav-toggle {
+            display: block;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+            z-index: 100;
+            cursor: pointer;
+        }
+
+        @media (min-width: 900px) {
+            .mobile-nav-toggle {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-wrapper">
+        <nav class="sidebar">
+            <a href="#" class="brand">UE Video Compare</a>
+            <a href="http://localhost:10002/example/" class="nav-link">Demos</a>
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#installation" class="nav-link">Installation</a>
+            <a href="#basic-usage" class="nav-link">Basic Usage</a>
+            <a href="#configuration" class="nav-link">Configuration</a>
+            <a href="#captions" class="nav-link">Captions</a>
+            <a href="#advanced" class="nav-link">Advanced</a>
+            <a href="#credits" class="nav-link">Credits & License</a>
+        </nav>
+
+        <main class="content">
+
+            <section id="intro" class="hero">
+                <h1>UE Video Comparison</h1>
+                <p class="lead">A powerful, high-performance library for comparing videos on the web. Support for
+                    sliders, wipers, side-by-side, and multi-video grids with perfect synchronization.</p>
+                <div style="margin-top: 1.5rem;">
+                    <span class="badge">v0.3.2</span>
+                    <span class="badge badge-light" style="margin-left: 0.5rem">Zero Dependencies</span>
+                    <span class="badge badge-light" style="margin-left: 0.5rem">MIT License</span>
+                </div>
+            </section>
+
+            <section id="features">
+                <h2>Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-title">⚡ Perfect Sync</div>
+                        <p>All videos stay frame-locked during playback, ensuring accurate comparisons at every
+                            millisecond.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-title">🎨 Multiple Layouts</div>
+                        <p>Slider, Wipe, Side-by-Side, 3-Video, and 4-Grid support out of the box.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-title">🚀 Performant</div>
+                        <p>Built-in viewport detection automatically pauses off-screen videos to save CPU and battery
+                            life.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-title">🔧 Customizable</div>
+                        <p>Control triggers (hover/click), directions, playback modes, and handle styles.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-title">🏷️ Easy Captions</div>
+                        <p>Add labels to videos effortlessly using simple HTML attributes.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-title">🪶 Lightweight</div>
+                        <p>Zero dependencies. Just drop the JS and CSS in and go.</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr style="border: 0; border-top: 1px solid var(--border); margin: 3rem 0;">
+
+            <section id="installation">
+                <h2>Installation</h2>
+                <p>Add the JS and CSS files to your project.</p>
+                <pre><code>&lt;!-- Styles --&gt;
+&lt;link rel="stylesheet" href="/dist/ue-video-compare.css"&gt;
+
+&lt;!-- Script --&gt;
+&lt;script src="/dist/ue-video-compare.min.js"&gt;&lt;/script&gt;</code></pre>
+            </section>
+
+            <section id="basic-usage">
+                <h2>Basic Usage</h2>
+                <p>Initialize the comparison by using the appropriate container class. No JavaScript initialization is
+                    required for static HTML.</p>
+                <pre><code>&lt;div class="uevc-slider-container"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Before"&gt;
+        &lt;source src="video1.mp4"&gt;
+    &lt;/video&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="After"&gt;
+        &lt;source src="video2.mp4"&gt;
+    &lt;/video&gt;
+&lt;/div&gt;</code></pre>
+            </section>
+
+            <section id="configuration">
+                <h2>Configuration</h2>
+
+                <h3>Container Classes</h3>
+                <p>Choose your comparison layout by applying one of these classes to the wrapper div:</p>
+                <ul>
+                    <li><code>uevc-slider-container</code>: Classic split-screen slider.</li>
+                    <li><code>uevc-wiper-container</code>: Automatic diagonal wipe transition.</li>
+                    <li><code>uevc-side-by-side-container</code>: Two videos next to each other.</li>
+                    <li><code>uevc-three-video-comparison-container</code>: Three videos with one as a mini-overlay.
+                    </li>
+                    <li><code>uevc-four-grid-container</code>: A 2x2 grid of synchronized videos.</li>
+                </ul>
+
+                <h3>Data Attributes (Global)</h3>
+                <p>Apply these to the main container <code>&lt;div&gt;</code>:</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Attribute</th>
+                                <th>Options</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>data-trigger</code></td>
+                                <td>hover, click</td>
+                                <td>hover</td>
+                                <td>How the user moves the slider.</td>
+                            </tr>
+                            <tr>
+                                <td><code>data-direction</code></td>
+                                <td>horizontal, vertical</td>
+                                <td>horizontal</td>
+                                <td>Orientation of the slider.</td>
+                            </tr>
+                            <tr>
+                                <td><code>data-initial</code></td>
+                                <td>0 to 100</td>
+                                <td>50</td>
+                                <td>Initial split position (percentage).</td>
+                            </tr>
+                            <tr>
+                                <td><code>data-play-mode</code></td>
+                                <td>auto, interaction, manual</td>
+                                <td>auto</td>
+                                <td><strong>interaction</strong>: Play on first hover. <br><strong>manual</strong>: Play
+                                    only while hovering.</td>
+                            </tr>
+                            <tr>
+                                <td><code>data-viewport-pause</code></td>
+                                <td>true, false</td>
+                                <td>false</td>
+                                <td>If true, pauses video off-screen to save CPU/Battery.</td>
+                            </tr>
+                            <tr>
+                                <td><code>data-handle-type</code></td>
+                                <td>bar, arrows, icon</td>
+                                <td>(none)</td>
+                                <td>Visual style of the slider handle.</td>
+                            </tr>
+                            <tr>
+                                <td><code>data-show-loading</code></td>
+                                <td>true, false</td>
+                                <td>true</td>
+                                <td>Set to false to disable the loading screen.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Data Attributes (Wiper Mode)</h3>
+                <p>Specific settings for the <code>uevc-wiper-container</code> layout:</p>
+                <ul>
+                    <li><code>data-duration</code>: Seconds to wait before starting the wipe (Default:
+                        <code>1.0</code>).
+                    </li>
+                    <li><code>data-transition-duration</code>: Milliseconds the wipe animation takes (Default:
+                        <code>1000</code>).
+                    </li>
+                </ul>
+            </section>
+
+            <section id="captions">
+                <h2>Captions</h2>
+                <p>Add labels to your videos by adding the <code>uevc-caption</code> attribute directly to the
+                    <code>&lt;video&gt;</code> tag:
+                </p>
+                <pre><code>&lt;video uevc-caption="Original 4K"&gt;...&lt;/video&gt;</code></pre>
+            </section>
+
+            <section id="advanced">
+                <h2>Advanced: Manual Initialization</h2>
+                <p>If you are adding containers dynamically via JavaScript (e.g., loading via AJAX or user interaction),
+                    you can re-run the initialization function.</p>
+                <pre><code>// Scans for new containers and initializes them 
+// (skips already initialized ones)
+UEVideoCompare();</code></pre>
+            </section>
+
+            <section id="credits">
+                <footer>
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Created by:</strong>
+                        <div class="author-list" style="margin-top: 0.5rem;">
+                            <span>@AxMusic (Ax Adarsh Pawar)</span>
+                            <span>•</span>
+                            <span>Unlimited Elements for Elementor</span>
+                            <span>•</span>
+                            <span>@LiangrunDa (Liangrun Da)</span>
+                        </div>
+                    </div>
+                    <p>Released under the <strong>MIT License</strong>.</p>
+                </footer>
+            </section>
+
+        </main>
+    </div>
+
+    <button class="mobile-nav-toggle"
+        onclick="document.querySelector('.sidebar').style.display = document.querySelector('.sidebar').style.display === 'block' ? 'none' : 'block'">
+        ☰
+    </button>
+
+</body>
+
+</html>
