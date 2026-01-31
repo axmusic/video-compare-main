@@ -17,7 +17,7 @@
         "comparison",
         "slider"
     ],
-    "author": "Liangrun Da",
+    "author": "Ax Adarsh Pawar, Unlimited Elements for Elementor, Liangrun Da",
     "license": "MIT",
     "devDependencies": {
         "@rollup/plugin-terser": "^0.4.4",
