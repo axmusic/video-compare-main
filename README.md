@@ -17,6 +17,10 @@ A powerful, high-performance library for comparing videos on the web. Support fo
 
 👉 **[View Live Demo](https://axmusic.github.io/video-compare-main/)**
 
+<a href="https://axmusic.github.io/video-compare-main/" target="_blank" rel="noopener noreferrer">
+  👉 <strong>View Live Demo</strong>
+</a>
+
 ## Installation
 
 Add the JS and CSS to your project:
