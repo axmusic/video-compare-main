@@ -1,7 +1,7 @@
 /*!
-* UE Video Comparison - v0.3.0
+* UE Video Comparison - v0.3.1
 * Unlimited Elements for Elementor, Adarsh Pawar.
-* Repository: https://github.com/axmusic/video-compare-main
+* Repository: https://github.com/AxMusic/video-compare-main
 * Based on: https://github.com/LiangrunDa/video-compare
 */
 const SLIDER_CONTAINER_CLASS = 'uevc-slider-container';
