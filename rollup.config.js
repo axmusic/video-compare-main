@@ -11,7 +11,6 @@ const banner = `/*!
 * UE Video Comparison - v${version}
 * Unlimited Elements for Elementor, Adarsh Pawar.
 * Repository: https://github.com/AxMusic/video-compare-main
-* Based on: https://github.com/LiangrunDa/video-compare
 */`;
 
 const stylesPlugin = styles({

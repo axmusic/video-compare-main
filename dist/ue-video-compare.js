@@ -2,7 +2,6 @@
 * UE Video Comparison - v0.3.2
 * Unlimited Elements for Elementor, Adarsh Pawar.
 * Repository: https://github.com/AxMusic/video-compare-main
-* Based on: https://github.com/LiangrunDa/video-compare
 */
 var UEVideoCompare = (function () {
     'use strict';
