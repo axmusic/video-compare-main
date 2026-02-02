@@ -207,6 +207,7 @@ export class BaseVideoPlayer {
 
     syncVideos(sourceIndex = 0) {
         const sourceVideo = this.videos[sourceIndex];
+        let lastSync = 0;
 
         // Sync playback state
         sourceVideo.addEventListener('play', () => {
@@ -230,12 +231,24 @@ export class BaseVideoPlayer {
 
         // Frequent sync check (throttle for performance)
         sourceVideo.addEventListener('timeupdate', () => {
-            this.videos.forEach((video, index) => {
-                // Use a larger threshold (0.1s) to avoid constant micro-seeking/lags
-                if (index !== sourceIndex && Math.abs(video.currentTime - sourceVideo.currentTime) > 0.1) {
-                    video.currentTime = sourceVideo.currentTime;
+
+            const now = performance.now();
+
+            if (now - lastSync < 200) return;
+
+            lastSync = now;
+
+            this.videos.forEach((v, i) => {
+
+                if (i !== sourceIndex) {
+
+                    const diff = Math.abs(v.currentTime - sourceVideo.currentTime);
+
+                    if (diff > 0.2) v.currentTime = sourceVideo.currentTime;
+
                 }
             });
+
         });
     }
 }
