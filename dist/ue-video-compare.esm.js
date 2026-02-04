@@ -1,5 +1,5 @@
 /*!
-* UE Video Comparison - v0.3.3
+* UE Video Comparison - v0.3.4
 * Unlimited Elements for Elementor, Adarsh Pawar.
 * Repository: https://github.com/AxMusic/video-compare-main
 */
@@ -299,11 +299,20 @@ class ComparisonWiper extends BaseVideoPlayer {
         // Read timing attributes - duration is in seconds
         const duration = parseFloat(this.container.getAttribute('data-duration')) || 1.0;
 
-        video1.addEventListener('loadedmetadata', () => {
+        const updateSize = () => {
+            if (!video1.videoWidth) return;
             this.container.style.aspectRatio = `${video1.videoWidth / video1.videoHeight} / 1`;
-        });
+            const aspect = video1.videoHeight / video1.videoWidth;
+            const width = this.container.offsetWidth;
+            if (!width) return;
+            this.container.style.minHeight = `${width * aspect}px`;
+        };
+        const resizeObserver = new ResizeObserver(updateSize);
 
-        // Monitor video1 progress to trigger animation
+        video1.addEventListener('loadedmetadata', updateSize);
+        // window.addEventListener('resize', updateSize);
+        resizeObserver.observe(this.container);
+
         video1.addEventListener('timeupdate', () => {
             if (!this.animationTriggered && video2.currentTime > duration) {
                 // console.log('triggering animation');
@@ -408,13 +417,19 @@ class ComparisonSlider extends BaseVideoPlayer {
         const video = this.videos[0];
 
         const updateSize = () => {
+            if (!video.videoWidth) return;
+            this.container.style.aspectRatio = `${video.videoWidth / video.videoHeight} / 1`;
             const aspect = video.videoHeight / video.videoWidth;
             const width = this.container.offsetWidth;
+            if (!width) return;
             this.container.style.minHeight = `${width * aspect}px`;
         };
+        const resizeObserver = new ResizeObserver(updateSize);
 
         video.addEventListener('loadedmetadata', updateSize);
-        window.addEventListener('resize', updateSize);
+        // window.addEventListener('resize', updateSize);
+        resizeObserver.observe(this.container);
+
 
         const trigger = this.container.getAttribute('data-trigger');
         const direction = this.container.getAttribute('data-direction');

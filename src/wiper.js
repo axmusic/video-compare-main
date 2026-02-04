@@ -35,11 +35,20 @@ export class ComparisonWiper extends BaseVideoPlayer {
         // Read timing attributes - duration is in seconds
         const duration = parseFloat(this.container.getAttribute('data-duration')) || 1.0;
 
-        video1.addEventListener('loadedmetadata', () => {
+        const updateSize = () => {
+            if (!video1.videoWidth) return;
             this.container.style.aspectRatio = `${video1.videoWidth / video1.videoHeight} / 1`;
-        });
+            const aspect = video1.videoHeight / video1.videoWidth;
+            const width = this.container.offsetWidth;
+            if (!width) return;
+            this.container.style.minHeight = `${width * aspect}px`;
+        };
+        const resizeObserver = new ResizeObserver(updateSize);
 
-        // Monitor video1 progress to trigger animation
+        video1.addEventListener('loadedmetadata', updateSize);
+        // window.addEventListener('resize', updateSize);
+        resizeObserver.observe(this.container);
+
         video1.addEventListener('timeupdate', () => {
             if (!this.animationTriggered && video2.currentTime > duration) {
                 // console.log('triggering animation');

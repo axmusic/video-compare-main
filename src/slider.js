@@ -27,13 +27,19 @@ export class ComparisonSlider extends BaseVideoPlayer {
         const video = this.videos[0];
 
         const updateSize = () => {
+            if (!video.videoWidth) return;
+            this.container.style.aspectRatio = `${video.videoWidth / video.videoHeight} / 1`;
             const aspect = video.videoHeight / video.videoWidth;
             const width = this.container.offsetWidth;
+            if (!width) return;
             this.container.style.minHeight = `${width * aspect}px`;
         };
+        const resizeObserver = new ResizeObserver(updateSize);
 
         video.addEventListener('loadedmetadata', updateSize);
-        window.addEventListener('resize', updateSize);
+        // window.addEventListener('resize', updateSize);
+        resizeObserver.observe(this.container);
+
 
         const trigger = this.container.getAttribute('data-trigger');
         const direction = this.container.getAttribute('data-direction');

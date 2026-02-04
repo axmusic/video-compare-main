@@ -5,7 +5,7 @@
 }
 
 .uevc-slider-container {
-    display: inline-block;
+    display: flex;
     line-height: 0;
     position: relative;
     width: 100%;
