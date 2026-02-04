@@ -409,9 +409,15 @@ var UEVideoCompare = (function () {
             clipper.appendChild(wrapper2);
 
             const video = this.videos[0];
-            video.addEventListener('loadedmetadata', () => {
-                this.container.style.aspectRatio = `${video.videoWidth / video.videoHeight} / 1`;
-            });
+
+            const updateSize = () => {
+                const aspect = video.videoHeight / video.videoWidth;
+                const width = this.container.offsetWidth;
+                this.container.style.minHeight = `${width * aspect}px`;
+            };
+
+            video.addEventListener('loadedmetadata', updateSize);
+            window.addEventListener('resize', updateSize);
 
             const trigger = this.container.getAttribute('data-trigger');
             const direction = this.container.getAttribute('data-direction');
