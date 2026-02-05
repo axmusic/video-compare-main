@@ -69,6 +69,10 @@ Apply these to the main container `<div>`:
 | `data-handle-type` | `bar`, `arrows`, `icon` | (none) | Visual style of the slider handle. |
 | `data-show-loading` | `true`, `false` | `true` | Set to `false` to disable the loading screen and prevent fallback HTML creation. |
 | `data-debug-loading` | `true`, `false` | `false` | Set to `true` to force the loading screen to stay visible (requires `data-show-loading` to be `true`). |
+| `data-auto-slide` | `true`, `false` | `false` | Enables automatic sliding oscillation. |
+| `data-auto-slide-duration` | `number` (ms) | `2000` | Duration of one full slide (0-100 or 100-0). |
+| `data-auto-slide-resume` | `true`, `false` | `false` | Whether to resume auto-sliding after interaction. |
+| `data-auto-slide-resume-delay` | `number` (ms) | `1500` | Delay before resuming auto-slide after interaction ends. |
 
 ### Data Attributes (Wiper Mode)
 - `data-duration`: Seconds to wait before starting the wipe (Default: `1.0`).

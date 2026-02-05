@@ -325,6 +325,7 @@
     <div class="tabs-wrapper">
         <div class="tabs-container">
             <button class="tab-button active" data-tab="slider">Slider (Hover)</button>
+            <button class="tab-button" data-tab="auto-slide">Auto Slide</button>
             <button class="tab-button" data-tab="click-slider">Slider (Click)</button>
             <button class="tab-button" data-tab="vertical-slider">Vertical</button>
             <button class="tab-button" data-tab="three-video">Three Video</button>
@@ -360,6 +361,41 @@
                 </div>
 
                 <pre><code class="html">&lt;div class="uevc-slider-container" data-initial="20"&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="Before"&gt;
+        &lt;source src="./videos/video1.webm"&gt;
+    &lt;/video&gt;
+    &lt;video playsinline autoplay muted loop uevc-caption="After"&gt;
+        &lt;source src="./videos/video2.webm"&gt;
+    &lt;/video&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+        </div>
+
+        <div class="tab-content" data-tab="auto-slide">
+            <div class="demo-card">
+                <h2>Auto Slide Comparison</h2>
+                <p>Slider oscillates automatically. Pauses on interaction and resumes after delay.</p>
+
+                <div class="uevc-slider-container" data-handle-type="arrows" data-trigger="click" data-initial="50"
+                    data-auto-slide="true" data-auto-slide-duration="3000" data-auto-slide-resume="true"
+                    data-auto-slide-resume-delay="500" data-viewport-pause="true">
+                    <video playsinline autoplay muted loop uevc-caption="Before">
+                        <source src="./media/video_20260129_174240.mp4">
+                    </video>
+                    <video playsinline autoplay muted loop uevc-caption="After">
+                        <source src="./media/video_20260129_174204.mp4">
+                    </video>
+                    <div class="uevc-loading-wrapper">
+                        <div class="uevc-loading">Loading</div>
+                    </div>
+                </div>
+
+                <pre><code class="html">&lt;div class="uevc-slider-container" 
+    data-trigger="click" 
+    data-auto-slide="true" 
+    data-auto-slide-duration="2000" 
+    data-auto-slide-resume="true" 
+    data-auto-slide-resume-delay="1500"&gt;
     &lt;video playsinline autoplay muted loop uevc-caption="Before"&gt;
         &lt;source src="./videos/video1.webm"&gt;
     &lt;/video&gt;

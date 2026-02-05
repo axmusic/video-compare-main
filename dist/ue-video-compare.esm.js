@@ -533,6 +533,74 @@ class ComparisonSlider extends BaseVideoPlayer {
             }, { passive: false });
         }
 
+        // Auto slide functionality
+        const autoSlide = this.container.getAttribute('data-auto-slide') === 'true';
+        const autoSlideDuration = parseInt(this.container.getAttribute('data-auto-slide-duration')) || 2000;
+        const autoSlideResume = this.container.getAttribute('data-auto-slide-resume') === 'true';
+        const autoSlideResumeDelay = parseInt(this.container.getAttribute('data-auto-slide-resume-delay')) || 1500;
+
+        if (autoSlide) {
+            let direction = 1; // 1 for right, -1 for left
+            let animationFrame;
+            let isPaused = false;
+            let resumeTimeout;
+
+            let progress = initialPosition / 100; // 0 to 1
+            let lastFrameTime = null;
+
+            const animateSmooth = (timestamp) => {
+                if (!lastFrameTime) lastFrameTime = timestamp;
+                const deltaTime = timestamp - lastFrameTime;
+                lastFrameTime = timestamp;
+
+                if (isPaused) return;
+
+                const step = deltaTime / autoSlideDuration;
+
+                if (direction === 1) {
+                    progress += step;
+                    if (progress >= 1) {
+                        progress = 1;
+                        direction = -1;
+                    }
+                } else {
+                    progress -= step;
+                    if (progress <= 0) {
+                        progress = 0;
+                        direction = 1;
+                    }
+                }
+
+                setPosition(progress * 100);
+                animationFrame = requestAnimationFrame(animateSmooth);
+            };
+
+            const stopSlide = () => {
+                isPaused = true;
+                if (animationFrame) cancelAnimationFrame(animationFrame);
+                lastFrameTime = null;
+                if (resumeTimeout) clearTimeout(resumeTimeout);
+            };
+
+            const resumeSlide = () => {
+                if (!autoSlideResume) return;
+                resumeTimeout = setTimeout(() => {
+                    isPaused = false;
+                    animationFrame = requestAnimationFrame(animateSmooth);
+                }, autoSlideResumeDelay);
+            };
+
+            // Start initial animation
+            animationFrame = requestAnimationFrame(animateSmooth);
+
+            // Event listeners to pause/resume
+            this.container.addEventListener('mouseenter', stopSlide);
+            this.container.addEventListener('touchstart', stopSlide, { passive: true });
+
+            this.container.addEventListener('mouseleave', resumeSlide);
+            this.container.addEventListener('touchend', resumeSlide, { passive: true });
+        }
+
         // Touch support for both modes
         if (trigger === 'click') {
             this.container.addEventListener('touchstart', (e) => {
