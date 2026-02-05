@@ -1,5 +1,5 @@
 /*!
-* UE Video Comparison - v0.4.0
+* UE Video Comparison - v0.4.1
 * Unlimited Elements for Elementor, Adarsh Pawar.
 * Repository: https://github.com/AxMusic/video-compare-main
 */
