@@ -1,5 +1,5 @@
 /*!
-* UE Video Comparison - v0.3.5
+* UE Video Comparison - v0.4.0
 * Unlimited Elements for Elementor, Adarsh Pawar.
 * Repository: https://github.com/AxMusic/video-compare-main
 */
@@ -466,9 +466,12 @@ class ComparisonSlider extends BaseVideoPlayer {
             this.container.appendChild(handle);
         }
 
+        let currentSliderPosition = 50;
+
         const setPosition = (position) => {
             // Clamp position between 0 and 100
             position = Math.max(0, Math.min(100, position));
+            currentSliderPosition = position;
 
             if (direction === 'vertical') {
                 clipper.style.height = position + '%';
@@ -586,6 +589,7 @@ class ComparisonSlider extends BaseVideoPlayer {
                 if (!autoSlideResume) return;
                 resumeTimeout = setTimeout(() => {
                     isPaused = false;
+                    progress = currentSliderPosition / 100;
                     animationFrame = requestAnimationFrame(animateSmooth);
                 }, autoSlideResumeDelay);
             };

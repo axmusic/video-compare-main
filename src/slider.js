@@ -76,9 +76,12 @@ export class ComparisonSlider extends BaseVideoPlayer {
             this.container.appendChild(handle);
         }
 
+        let currentSliderPosition = 50;
+
         const setPosition = (position) => {
             // Clamp position between 0 and 100
             position = Math.max(0, Math.min(100, position));
+            currentSliderPosition = position;
 
             if (direction === 'vertical') {
                 clipper.style.height = position + '%';
@@ -228,6 +231,7 @@ export class ComparisonSlider extends BaseVideoPlayer {
                 if (!autoSlideResume) return;
                 resumeTimeout = setTimeout(() => {
                     isPaused = false;
+                    progress = currentSliderPosition / 100;
                     animationFrame = requestAnimationFrame(animateSmooth);
                 }, autoSlideResumeDelay);
             };
