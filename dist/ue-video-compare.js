@@ -757,6 +757,28 @@ var UEVideoCompare = (function () {
         } else {
             initialize();
         }
+
+        // Observe for dynamic content changes (SPA, iframes, etc.)
+        const observer = new MutationObserver((mutations) => {
+            let shouldUpdate = false;
+            for (const mutation of mutations) {
+                if (mutation.addedNodes.length) {
+                    shouldUpdate = true;
+                    break;
+                }
+            }
+            if (shouldUpdate) {
+                initialize();
+            }
+        });
+
+        if (document.body) {
+            observer.observe(document.body, { childList: true, subtree: true });
+        } else {
+            document.addEventListener('DOMContentLoaded', () => {
+                observer.observe(document.body, { childList: true, subtree: true });
+            });
+        }
     }
 
     initUEVideoCompare();
